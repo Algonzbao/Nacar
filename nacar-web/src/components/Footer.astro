@@ -1,0 +1,59 @@
+---
+import { Image } from "astro:assets";
+import logoBlanco from "../assets/logoBlanco.png";
+---
+
+<footer
+    class="footer-visible bottom-0 left-0 w-full bg-primary text-white py-4 px-6 lg:px-10 flex items-center justify-between transition-all duration-400"
+>
+    {/* Logo */}
+    <div class="flex items-center">
+        <Image src={logoBlanco} alt="Logo" class="h-12 w-auto" />
+    </div>
+
+    {/* Enlaces */}
+    <div class="hidden lg:flex">
+        <ul class="flex gap-6 text-sm md:text-xl">
+            <li>
+                <a href="/conocenos" class="hover:text-hoverRosa font-bold">
+                    Conoce
+                </a>
+            </li>
+            <li>
+                <a href="/eventos" class="hover:text-hoverRosa font-bold">
+                    Eventos
+                </a>
+            </li>
+            <li>
+                <a href="/inscripcion" class="hover:text-hoverRosa font-bold">
+                    Contacto
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    {/* Redes sociales */}
+    <div class="flex gap-4">
+        <a
+            href="https://www.facebook.com/nacarasociacion/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fab fa-facebook-square text-xl hover:text-hoverRosa"></i>
+        </a>
+        <a
+            href="https://www.instagram.com/nacarasociacion/?hl=es"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fab fa-instagram text-xl hover:text-hoverRosa"></i>
+        </a>
+        <a
+            href="https://es.linkedin.com/company/n%C3%A1car-asociaci%C3%B3n"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fab fa-linkedin text-xl hover:text-hoverRosa"></i>
+        </a>
+    </div>
+</footer>

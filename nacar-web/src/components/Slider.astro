@@ -1,0 +1,86 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const shields = await getCollection("shields");
+const totalItems = shields.length;
+---
+
+<div class="relative overflow-hidden w-full">
+    {/* Contenedor del slider */}
+    <div
+        id="slider-track"
+        class="flex items-center justify-evenly gap-48 transition-transform duration-700"
+        data-total-items={totalItems}
+    >
+        {
+            [...shields.sort((a, b) => a.data.id - b.data.id)].map((shield) => {
+                const { data } = shield;
+                const { name, image } = data;
+                return (
+                    <div class="shield-container flex-shrink-0 flex flex-col items-center text-center w-24">
+                        {/* Contenedor del escudo */}
+                        <div class="flex items-center justify-center h-32">
+                            <Image
+                                src={image}
+                                height={131}
+                                width={75}
+                                alt={`escudo-${name}`}
+                                class="w-3/4 h-auto object-contain rounded-lg"
+                            />
+                        </div>
+
+                        {/* Contenedor del texto con altura fija */}
+                        <div class="mt-4 flex items-center justify-center min-h-[56px]">
+                            <p class="text-sm text-gray-700 font-bold leading-tight">
+                                {name}
+                            </p>
+                        </div>
+                    </div>
+                );
+            })
+        }
+
+        {
+            [...shields.sort((a, b) => a.data.id - b.data.id)].map((shield) => {
+                const { data } = shield;
+                const { name, image } = data;
+                return (
+                    <div class="shield-container flex-shrink-0 flex flex-col items-center text-center w-24">
+                        {/* Contenedor del escudo */}
+                        <div class="flex items-center justify-center h-32">
+                            <Image
+                                src={image}
+                                height={131}
+                                width={75}
+                                alt={`escudo-${name}`}
+                                class="w-3/4 h-auto object-contain rounded-lg"
+                            />
+                        </div>
+
+                        {/* Contenedor del texto con altura fija */}
+                        <div class="mt-4 flex items-center justify-center min-h-[56px]">
+                            <p class="text-sm text-gray-700 font-bold leading-tight">
+                                {name}
+                            </p>
+                        </div>
+                    </div>
+                );
+            })
+        }
+    </div>
+</div>
+
+<script>
+    let offset = 0;
+    const itemWidth = 280; // Ancho de imagen + espaciado (gap-48 + w-24)
+    const track = document.getElementById("slider-track");
+    const totalItems = track?.dataset.totalItems ?? '0';
+
+    if (track) {
+        setInterval(() => {
+            offset = (offset + 1) % +totalItems;
+            track.style.transform = `translateX(-${offset * itemWidth}px)`;
+        }, 2000);
+    }
+</script>

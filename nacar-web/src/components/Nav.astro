@@ -1,0 +1,101 @@
+---
+import { Image } from "astro:assets";
+import logoNacar from "../assets/logoBlanco.png";
+---
+
+<nav class="bg-primary text-white fixed w-full z-10">
+    <div
+        class="h-16 flex justify-between items-center px-6 py-4 w-full max-w-full"
+    >
+        {/* Logo */}
+        <div class="flex items-center">
+            <a href="/" class="text-3xl font-bold flex items-center">
+                <Image src={logoNacar} alt="Logo" class="h-12 w-auto mr-2" />
+            </a>
+        </div>
+
+        {/* Links visibles en pantallas grandes */}
+        <div class="hidden lg:flex items-center">
+            <ul class="flex gap-8 text-xl">
+                <li>
+                    <a href="/conocenos" class="hover:text-hoverRosa font-bold">
+                        Conoce
+                    </a>
+                </li>
+                <li>
+                    <a href="/eventos" class="hover:text-hoverRosa font-bold">
+                        Eventos
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="/inscripcion"
+                        class="hover:text-hoverRosa font-bold"
+                    >
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        {/* Botón del menú hamburguesa en pantallas pequeñas */}
+        <div class="lg:hidden">
+            <button id="hamburger-button" class="text-2xl focus:outline-none">
+                <span class="block w-8 h-1 bg-white mb-2"></span>
+                <span class="block w-8 h-1 bg-white mb-2"></span>
+                <span class="block w-8 h-1 bg-white"></span>
+            </button>
+        </div>
+    </div>
+
+    {/* Menú desplegable en pantallas pequeñas */}
+    <div
+        id="mobileMenu"
+        class="hidden absolute top-16 left-0 w-full bg-slate-900 text-center p-5 z-50 animate-fade-in-down"
+    >
+        <ul class="text-xl">
+            <li class="my-4">
+                <a
+                    href="/conocenos"
+                    class="block hover:bg-slate-800 py-2 rounded mobileLink"
+                >
+                    Conoce
+                </a>
+            </li>
+            <li class="my-4">
+                <a
+                    href="/eventos"
+                    class="block hover:bg-slate-800 py-2 rounded mobileLink"
+                    onclick="closeMenu()"
+                >
+                    Eventos
+                </a>
+            </li>
+            <li class="my-4">
+                <a
+                    href="/inscripcion"
+                    class="block hover:bg-slate-800 py-2 rounded mobileLink"
+                    onclick="closeMenu()"
+                >
+                    Contacto
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const hamburgerButton = document.getElementById("hamburger-button");
+        const mobileLinks = document.querySelectorAll(".mobileLink");
+        const menu = document.getElementById("mobileMenu");
+
+        hamburgerButton?.addEventListener("click", () => {
+            menu?.classList.toggle("hidden");
+        });
+
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                menu?.classList.add("hidden");
+            });
+        });
+    </script>
+</nav>
