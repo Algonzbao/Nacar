@@ -11,11 +11,12 @@ import cumple from "../assets/cumpleaños.jpg";
 import manos from "../assets/handsOn.jpg";
 import pajaro from "../assets/pájaro.png";
 import urba from "../assets/empresa.jpg";
-import ver21 from "../assets/verano21.png";
-import ver22 from "../assets/verano22.png";
-import ver23 from "../assets/verano23.png";
-import ver24 from "../assets/verano24.png";
 import { Image } from 'astro:assets';
+import { getCollection } from "astro:content";
+import StoriesGallery from '../components/Stories';
+
+const galleries = await getCollection("galleries");
+
 ---
 
 <Layout title='Nacar Asociación'>
@@ -29,7 +30,9 @@ import { Image } from 'astro:assets';
 		  }}
 		>
 		  <div class="absolute top-0 left-0 w-full h-full primary font-sans">
-			<!-- <StoriesGallery galleries={galleries} /> -->
+			<div class="mt-20">
+				<StoriesGallery client:load galleries={galleries.map(g => g.data).sort((a,b) => b.year - a.year)} />
+			</div>
 			<div class="flex items-center justify-start h-full px-8 sm:px-10 text-white">
 			  <div>
 				<h1 class="text-3xl sm:text-4xl font-bold mb-4">

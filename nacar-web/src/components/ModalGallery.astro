@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+const { images, isOpen } = Astro.props;
+
+let open = false;
+---
+
+{
+    isOpen ? (
+        <div
+            id="modal-gallery"
+            class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+        >
+            <div class="bg-primary p-4 rounded-lg w-full max-w-5xl max-h-screen flex justify-center items-center">
+                <div class="grid grid-cols-2 gap-4 w-full h-full">
+                    {
+                        /* @ts-ignore */
+                        images.map((image, index) => (
+                            <div
+                                class="w-full h-full flex justify-center items-center"
+                                style={{ maxHeight: "50vh", maxWidth: "50vw" }}
+                            >
+                                <Image
+                                    src={image}
+                                    alt={`Galería ${index}`}
+                                    class="object-contain w-full h-full rounded-md"
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    ) : null
+}
+
+
+<script>
+    const modalGallery = document.getElementById("modal-gallery");
+    modalGallery?.addEventListener("click", () => {
+        modalGallery.toggleAttribute("hidden");
+    });
+</script>

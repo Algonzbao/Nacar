@@ -27,4 +27,13 @@ const shields = defineCollection({
     })
 })
 
-export const collections = { team, events, shields }
+const galleries = defineCollection({
+    schema: ({ image }) => z.object({
+        year: z.number(),
+        name: z.string(),
+        cover: image(),
+        images: z.array(image())
+    })
+})
+
+export const collections = { team, events, shields, galleries }
