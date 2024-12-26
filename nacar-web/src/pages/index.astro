@@ -1,8 +1,8 @@
 ---
-import Footer from '../components/Footer.astro';
-import Nav from '../components/Nav.astro';
-import Slider from '../components/Slider.astro';
-import Layout from '../layouts/Layout.astro';
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+import Slider from "../components/Slider.astro";
+import Layout from "../layouts/Layout.astro";
 import campamentoImagen from "../assets/Campamento_Buendia.png";
 import logoCorresponsables from "../assets/corresponsables.png";
 import empresa from "../assets/empresa.png";
@@ -11,224 +11,254 @@ import cumple from "../assets/cumpleaños.jpg";
 import manos from "../assets/handsOn.jpg";
 import pajaro from "../assets/pájaro.png";
 import urba from "../assets/empresa.jpg";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import StoriesGallery from '../components/Stories';
+import StoriesGallery from "../components/Stories";
 
 const galleries = await getCollection("galleries");
-
 ---
 
-<Layout title='Nacar Asociación'>
+<Layout title="Nacar Asociación">
 	<Nav />
 	<div>
 		{/* Sección con fondo y contenido principal */}
 		<div
-		  class="relative w-full min-h-[90vh] bg-cover bg-bottom"
-		  style={{
-			backgroundImage: `url(${campamentoImagen.src})`,
-		  }}
+			class="relative w-full min-h-[90vh] bg-cover bg-bottom"
+			style={{
+				backgroundImage: `url(${campamentoImagen.src})`,
+			}}
 		>
-		  <div class="absolute top-0 left-0 w-full h-full primary font-sans">
-			<div class="mt-20">
-				<StoriesGallery client:load galleries={galleries.map(g => g.data).sort((a,b) => b.year - a.year)} />
-			</div>
-			<div class="flex items-center justify-start h-full px-8 sm:px-10 text-white">
-			  <div>
-				<h1 class="text-3xl sm:text-4xl font-bold mb-4">
-				  ¡Bienvenido a nuestra página!
-				</h1>
-				<p class="text-lg sm:text-xl mb-8">
-				  Regístrate ahora y empieza a disfrutar de nuestros servicios.
-				</p>
-				<a
-				  href="/inscripcion"
-				  class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
+			<div class="absolute top-0 left-0 w-full h-full primary font-sans">
+				<div class="mt-20">
+					<StoriesGallery
+						client:load
+						galleries={galleries
+							.map((g) => g.data)
+							.sort((a, b) => b.year - a.year)}
+					/>
+				</div>
+				<div
+					class="flex items-center justify-start h-full px-8 sm:px-10 text-white"
 				>
-				  Contactar
-			</a>
-			  </div>
+					<div>
+						<h1 class="text-3xl sm:text-4xl font-bold mb-4">
+							¡Bienvenido a nuestra página!
+						</h1>
+						<p class="text-lg sm:text-xl mb-8">
+							Regístrate ahora y empieza a disfrutar de nuestros
+							servicios.
+						</p>
+						<a
+							href="/inscripcion"
+							class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
+						>
+							Contactar
+						</a>
+					</div>
+				</div>
 			</div>
-		  </div>
 		</div>
-	  
+
 		{/* Sección de texto e imagen */}
-		<div class="flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-gray-50">
-		  <div class="lg:w-1/2">
-			<Image src={logoNacar} alt="Logo Nacar" class="w-full h-auto" />
-		  </div>
-		  <div class="lg:w-1/2 text-center lg:text-left mt-6 lg:mt-0">
-			<h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
-			  Tus campamentos y eventos personalizados
-			</h2>
-			<p class="text-lg text-gray-700">
-			  Ofrecemos campamentos únicos diseñados para cada grupo, adaptados a tus
-			  necesidades y preferencias. Ya sea para empresas, instituciones
-			  educativas o grupos familiares, te brindamos una experiencia inolvidable
-			  en un entorno natural. ¡Contacta con nosotros y organiza tu próximo
-			  evento!
-			</p>
-		  </div>
+		<div
+			class="flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-gray-50"
+		>
+			<div class="lg:w-1/2">
+				<Image src={logoNacar} alt="Logo Nacar" class="w-full h-auto" />
+			</div>
+			<div class="lg:w-1/2 text-center lg:text-left mt-6 lg:mt-0">
+				<h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
+					Tus campamentos y eventos personalizados
+				</h2>
+				<p class="text-lg text-gray-700">
+					Ofrecemos campamentos únicos diseñados para cada grupo,
+					adaptados a tus necesidades y preferencias. Ya sea para
+					empresas, instituciones educativas o grupos familiares, te
+					brindamos una experiencia inolvidable en un entorno natural.
+					¡Contacta con nosotros y organiza tu próximo evento!
+				</p>
+			</div>
 		</div>
-	  
+
 		{/* Sección con fondo de color y texto */}
 		<div class="bg-primary text-white py-10 px-6 lg:px-16">
-		  <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center">
-			<div class="lg:w-2/3 text-center lg:text-left mb-6 lg:mb-0">
-			  <h3 class="text-2xl sm:text-3xl font-bold mb-4">
-				Desde 2010, ofreciendo experiencias inolvidables para toda la familia
-			  </h3>
-			  <p class="text-lg mb-4">
-				En <strong>NÁCAR ASOCIACIÓN</strong>, nos especializamos en crear
-				momentos únicos y memorables. Con más de 3000 participantes por
-				temporada, ofrecemos una amplia gama de eventos, incluyendo campamentos
-				de verano, cumpleaños personalizados, comuniones y más.
-			  </p>
-			  <p class="text-lg mb-6">
-				Ya sea que busques una aventura en la naturaleza o un evento privado en
-				un entorno exclusivo, tenemos lo que necesitas para hacerlo especial.
-			  </p>
-			  <a
-				href="/eventos"
-				class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
-			  >
-				Descubre nuestros eventos
-			</a>
+			<div
+				class="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center"
+			>
+				<div class="lg:w-2/3 text-center lg:text-left mb-6 lg:mb-0">
+					<h3 class="text-2xl sm:text-3xl font-bold mb-4">
+						Desde 2010, ofreciendo experiencias inolvidables para
+						toda la familia
+					</h3>
+					<p class="text-lg mb-4">
+						En <strong>NÁCAR ASOCIACIÓN</strong>, nos especializamos
+						en crear momentos únicos y memorables. Con más de 3000
+						participantes por temporada, ofrecemos una amplia gama
+						de eventos, incluyendo campamentos de verano, cumpleaños
+						personalizados, comuniones y más.
+					</p>
+					<p class="text-lg mb-6">
+						Ya sea que busques una aventura en la naturaleza o un
+						evento privado en un entorno exclusivo, tenemos lo que
+						necesitas para hacerlo especial.
+					</p>
+					<a
+						href="/eventos"
+						class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
+					>
+						Descubre nuestros eventos
+					</a>
+				</div>
+				<div class="lg:w-1/3 flex justify-center lg:justify-end">
+					<Image src={pajaro} alt="Logo" class="h-60 w-auto" />
+				</div>
 			</div>
-			<div class="lg:w-1/3 flex justify-center lg:justify-end">
-			  <Image
-				src={pajaro}
-				alt="Logo"
-				class="h-60 w-auto"
-			  />
-			</div>
-		  </div>
 		</div>
-	  
-	  {/* CONTENEDOR LLAMAR AHORA */}
-	  <div class="flex flex-col items-center justify-center bg-white text-black py-12 px-6 lg:px-16">
-		<h2 class="text-3xl font-bold text-center mb-4">
-		  ¿Tienes algún evento en el que quisieras que te acompañáramos?
-		</h2>
-		<p class="text-lg mb-6 text-center">
-		  Ponte en contacto con nosotros. 
-		  <span class="font-semibold"> ¡Llámanos!</span>
-		</p>
-		<a
-		  href="tel:+34691247681"
-		  class="px-6 py-3 bg-arena text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
+
+		{/* CONTENEDOR LLAMAR AHORA */}
+		<div
+			class="flex flex-col items-center justify-center bg-white text-black py-12 px-6 lg:px-16"
 		>
-		  Llamar ahora
-		</a>
-	  </div>
-	  
-	  {/* CONTENEDOR DE BLOQUES ADICIONALES */}
-	  <div class="flex flex-col lg:flex-row justify-center items-stretch mt-12 w-full max-w-7xl mx-auto gap-6">
-		{/* BLOQUE 1: CUMPLEAÑOS */}
-		<div class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative">
-		  <Image
-			src={cumple}
-			alt="Cumpleaños"
-			class="w-full h-48 object-cover rounded-t-lg mb-4"
-		  />
-		  <h3 class="text-2xl font-bold mb-2">Cumpleaños</h3>
-		  <p class="text-base mb-6 text-center">
-			¡Celebra momentos inolvidables con nosotros! Organizamos tu cumpleaños soñado.
-		  </p>
-		  <a
-			href="/inscripcion"
-			class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
-		  >
-			Contactar
-		</a>
+			<h2 class="text-3xl font-bold text-center mb-4">
+				¿Tienes algún evento en el que quisieras que te acompañáramos?
+			</h2>
+			<p class="text-lg mb-6 text-center">
+				Ponte en contacto con nosotros.
+				<span class="font-semibold"> ¡Llámanos!</span>
+			</p>
+			<a
+				href="tel:+34691247681"
+				class="px-6 py-3 bg-arena text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
+			>
+				Llamar ahora
+			</a>
 		</div>
-	  
-		{/* BLOQUE 2: EMPRESA */}
-		<div class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative">
-		  <Image
-			src={empresa}
-			alt="Empresa"
-			class="w-full h-48 object-cover rounded-t-lg mb-4"
-		  />
-		  <h3 class="text-2xl font-bold mb-2">Empresa</h3>
-		  <p class="text-base mb-6 text-center">
-			Diseñamos eventos corporativos únicos para fortalecer tu equipo.
-		  </p>
-		  <a
-			href="/inscripcion"
-			class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
-		  >
-			Contactar
-		</a>
+
+		{/* CONTENEDOR DE BLOQUES ADICIONALES */}
+		<div
+			class="flex flex-col lg:flex-row justify-center items-stretch mt-12 w-full max-w-7xl mx-auto gap-6"
+		>
+			{/* BLOQUE 1: CUMPLEAÑOS */}
+			<div
+				class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative"
+			>
+				<Image
+					src={cumple}
+					alt="Cumpleaños"
+					class="w-full h-48 object-cover rounded-t-lg mb-4"
+				/>
+				<h3 class="text-2xl font-bold mb-2">Cumpleaños</h3>
+				<p class="text-base mb-6 text-center">
+					¡Celebra momentos inolvidables con nosotros! Organizamos tu
+					cumpleaños soñado.
+				</p>
+				<a
+					href="/inscripcion"
+					class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
+				>
+					Contactar
+				</a>
+			</div>
+
+			{/* BLOQUE 2: EMPRESA */}
+			<div
+				class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative"
+			>
+				<Image
+					src={empresa}
+					alt="Empresa"
+					class="w-full h-48 object-cover rounded-t-lg mb-4"
+				/>
+				<h3 class="text-2xl font-bold mb-2">Empresa</h3>
+				<p class="text-base mb-6 text-center">
+					Diseñamos eventos corporativos únicos para fortalecer tu
+					equipo.
+				</p>
+				<a
+					href="/inscripcion"
+					class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
+				>
+					Contactar
+				</a>
+			</div>
+
+			{/* BLOQUE 3: URBANIZACIONES */}
+			<div
+				class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative"
+			>
+				<Image
+					src={urba}
+					alt="Urbanizaciones"
+					class="w-full h-48 object-cover rounded-t-lg mb-4"
+				/>
+				<h3 class="text-2xl font-bold mb-2">Urbanizaciones</h3>
+				<p class="text-base mb-6 text-center">
+					Organizamos actividades especiales para urbanizaciones y
+					comunidades.
+				</p>
+				<a
+					href="/inscripcion"
+					class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
+				>
+					Contactar
+				</a>
+			</div>
 		</div>
-	  
-		{/* BLOQUE 3: URBANIZACIONES */}
-		<div class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative">
-		  <Image
-			src={urba}
-			alt="Urbanizaciones"
-			class="w-full h-48 object-cover rounded-t-lg mb-4"
-		  />
-		  <h3 class="text-2xl font-bold mb-2">Urbanizaciones</h3>
-		  <p class="text-base mb-6 text-center">
-			Organizamos actividades especiales para urbanizaciones y comunidades.
-		  </p>
-		  <a
-			href="/inscripcion"
-			class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
-		  >
-			Contactar
-		</a>
+
+		{/* CONTENEDOR CON LOGO Y SLIDER */}
+		<div
+			class="flex flex-col items-center justify-center py-12 px-6 mt-8 w-full"
+		>
+			<div class="mb-6 text-center">
+				<Image
+					src={logoCorresponsables}
+					alt="Logo Corresponsables"
+					class="w-40 mx-auto mb-4"
+				/>
+				<h2 class="text-3xl font-bold text-gray-800 mb-4">
+					Experiencia con Ayuntamientos:
+				</h2>
+			</div>
+			<p class="text-lg text-gray-700 mb-8 text-center">
+				A través del Plan Corresponsables hemos podido trabajar con los
+				ayuntamientos de:
+			</p>
+			<div class="slider-container w-full flex justify-center">
+				<Slider />
+			</div>
 		</div>
-	  </div>
-	  
-	  
-	  {/* CONTENEDOR CON LOGO Y SLIDER */}
-	  <div class="flex flex-col items-center justify-center py-12 px-6 mt-8 w-full">
-		<div class="mb-6 text-center">
-		  <Image
-			src={logoCorresponsables}
-			alt="Logo Corresponsables"
-			class="w-40 mx-auto mb-4"
-		  />
-		  <h2 class="text-3xl font-bold text-gray-800 mb-4">
-			Experiencia con Ayuntamientos:
-		  </h2>
+
+		{/* SECCIÓN FINAL */}
+		<div
+			class="flex flex-col lg:flex-row items-center justify-between py-12 px-6 bg-primary rounded-lg shadow-lg mb-20"
+		>
+			{/* Imagen */}
+			<div class="flex lg:w-1/3 lg:pr-8 mb-6 lg:mb-0">
+				<Image
+					src={manos}
+					alt="Campamento"
+					class="w-full h-64 object-cover rounded-lg"
+				/>
+			</div>
+			{/* Texto */}
+			<div class="lg:w-2/3 text-left">
+				<h2 class="text-3xl font-bold text-gray-800 mb-4">
+					¡Inscríbete ahora y vive una experiencia inolvidable!
+				</h2>
+				<p class="text-lg text-gray-700 mb-6">
+					Descubre todo lo que tenemos preparado para ti en nuestros
+					campamentos y eventos personalizados. Vive aventuras únicas
+					en un entorno natural, perfecto para grupos, familias y
+					empresas.
+				</p>
+				<a
+					href="/inscripcion"
+					class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
+				>
+					Ir a Contacto
+				</a>
+			</div>
 		</div>
-		<p class="text-lg text-gray-700 mb-8 text-center">
-		  A través del Plan Corresponsables hemos podido trabajar con los ayuntamientos de:
-		</p>
-		<div class="slider-container w-full flex justify-center">
-		  <Slider />
-		</div>
-	  </div>
-	  
-	  {/* SECCIÓN FINAL */}
-	  <div class="flex flex-col lg:flex-row items-center justify-between py-12 px-6 bg-primary rounded-lg shadow-lg mb-20">
-		{/* Imagen */}
-		<div class="flex lg:w-1/3 lg:pr-8 mb-6 lg:mb-0">
-		  <Image
-			src={manos} 
-			alt="Campamento"
-			class="w-full h-64 object-cover rounded-lg"
-		  />
-		</div>
-		{/* Texto */}
-		<div class="lg:w-2/3 text-left">
-		  <h2 class="text-3xl font-bold text-gray-800 mb-4">
-			¡Inscríbete ahora y vive una experiencia inolvidable!
-		  </h2>
-		  <p class="text-lg text-gray-700 mb-6">
-			Descubre todo lo que tenemos preparado para ti en nuestros campamentos y eventos personalizados. Vive aventuras únicas en un entorno natural, perfecto para grupos, familias y empresas.
-		  </p>
-		  <a
-			href="/inscripcion"
-			class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
-		  >
-			Ir a Contacto
-		</a>
-		</div>
-	  </div>
-	  </div>
+	</div>
 	<Footer />
 </Layout>

@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import contorno from "../assets/contorno.png";
 import mural from "../assets/mural.png";
 import { getCollection } from "astro:content";
-import ModalGallery from "../components/ModalGallery.astro";
+import EventsGallery from "../components/EventsGallery";
 
 const events = await getCollection("events");
 ---
@@ -22,7 +22,7 @@ const events = await getCollection("events");
             }}
         >
             <div class="max-w-3xl text-center p-4">
-                <h1 class="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+                <h1 class="text-5xl lg:text-6xl font-bold text-gray-800 mb-4 mt-8">
                     Estos son los eventos que preparamos en NACAR
                 </h1>
                 <p class="text-lg text-gray-700">
@@ -109,49 +109,7 @@ const events = await getCollection("events");
         {/* Tarjetas de actividades */}
         <div class="bg-white text-black py-12 px-4 lg:px-16">
             {/* Contenedor de las tarjetas */}
-            <div
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-screen-xl mx-auto"
-            >
-                {
-                    events
-                        .sort((a, b) => a.data.id - b.data.id)
-                        .map((evento, index) => {
-                            const isEven = index % 2 === 0;
-                            const cardClass = isEven
-                                ? "flex flex-col items-center p-8 rounded-lg shadow-lg bg-arena text-white"
-                                : "flex flex-col items-center p-8 rounded-lg shadow-lg bg-white text-arena";
-
-                            const iconColorClass = isEven
-                                ? "text-white"
-                                : "text-arena";
-                            const { data } = evento;
-                            const { id, img, title, description, gallery } =
-                                data;
-                            return (
-                                <div class={cardClass}>
-                                    <div class="border-4 border-primary overflow-hidden cursor-pointer">
-                                        <Image
-                                            src={img}
-                                            height={256}
-                                            alt={title}
-                                            class="object-cover w-full h-64"
-                                        />
-                                    </div>
-                                    <h2 class="text-lg font-bold mt-4">
-                                        {title}
-                                    </h2>
-                                    <p class="text-center">{description}</p>
-                                    <button
-                                        class={`text-2xl mt-4 ${iconColorClass} hover:text-hoverRosa`}
-                                    >
-                                        <i class="fas fa-images" />
-                                    </button>
-                                </div>
-                            );
-                            <ModalGallery images={gallery || []} isOpen={true} />;
-                        })
-                }
-            </div>
+            <EventsGallery client:visible events={events} />
         </div>
     </div>
     <Footer />

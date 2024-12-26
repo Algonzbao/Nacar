@@ -66,7 +66,6 @@ import logoNacar from "../assets/logoBlanco.png";
                 <a
                     href="/eventos"
                     class="block hover:bg-slate-800 py-2 rounded mobileLink"
-                    onclick="closeMenu()"
                 >
                     Eventos
                 </a>
@@ -75,7 +74,6 @@ import logoNacar from "../assets/logoBlanco.png";
                 <a
                     href="/inscripcion"
                     class="block hover:bg-slate-800 py-2 rounded mobileLink"
-                    onclick="closeMenu()"
                 >
                     Contacto
                 </a>
@@ -83,18 +81,21 @@ import logoNacar from "../assets/logoBlanco.png";
         </ul>
     </div>
 
-    <script>
-        const hamburgerButton = document.getElementById("hamburger-button");
-        const mobileLinks = document.querySelectorAll(".mobileLink");
-        const menu = document.getElementById("mobileMenu");
-
-        hamburgerButton?.addEventListener("click", () => {
-            menu?.classList.toggle("hidden");
-        });
-
-        mobileLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-                menu?.classList.add("hidden");
+    <script is:inline>
+        // Reasignar eventos después de cargar la página
+        document.addEventListener("astro:page-load", () => {
+            const hamburgerButton = document.getElementById("hamburger-button");
+            const mobileLinks = document.querySelectorAll(".mobileLink");
+            const menu = document.getElementById("mobileMenu");
+    
+            hamburgerButton?.addEventListener("click", () => {
+                menu?.classList.toggle("hidden");
+            });
+    
+            mobileLinks.forEach((link) => {
+                link.addEventListener("click", () => {
+                    menu?.classList.add("hidden");
+                });
             });
         });
     </script>
