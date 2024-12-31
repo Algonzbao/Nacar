@@ -1,0 +1,89 @@
+---
+// Importaciones necesarias
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import eventoImage from "../assets/vestido.png"; // Reemplaza con la imagen adecuada
+import actividadesImage from "../assets/aula.png"; // Reemplaza con la imagen adecuada
+---
+
+<Layout title="Nacar Asociación - Eventos Empresariales">
+    <Nav />
+    <div>
+        {/* Encabezado */}
+        <div
+            class="flex flex-col items-center justify-center px-6 py-12 min-h-[40vh] bg-cover bg-center bg-no-repeat"
+            style={{
+                backgroundImage: `url(${eventoImage.src})`,
+            }}
+        >
+        <div class="max-w-3xl text-center p-4 bg-white bg-opacity-90 rounded-lg shadow-lg">
+            <h1 class="text-5xl lg:text-6xl font-bold text-arena mb-4 mt-8 text-center">
+                Eventos Empresariales
+            </h1>
+            <p class="text-lg text-black text-center max-w-2xl leading-relaxed">
+                Diseñamos actividades para niños durante las fiestas de empresa,
+                permitiendo a los padres disfrutar mientras sus hijos se divierten
+                en un entorno seguro y supervisado.
+            </p>
+        </div>
+        </div>
+
+        {/* Descripción del evento */}
+        <div class="py-12 px-6 lg:px-16 bg-white text-gray-800">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Imagen representativa */}
+                <div class="flex justify-center">
+                    <img
+                        src={actividadesImage.src}
+                        alt="Actividades para niños en eventos"
+                        class="rounded-lg shadow-lg"
+                    />
+                </div>
+
+                {/* Información sobre el evento */}
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-3xl font-bold text-primary mb-4">
+                        ¿Qué ofrecemos para tus eventos empresariales?
+                    </h2>
+                    <ul class="list-disc pl-5 text-lg text-gray-700 leading-relaxed">
+                        <li>Animación y juegos temáticos para distintas edades.</li>
+                        <li>Talleres creativos: pintura, manualidades y cocina.</li>
+                        <li>Espacios seguros supervisados por monitores cualificados.</li>
+                        <li>Zona de descanso para los más pequeños.</li>
+                        <li>Actividades grupales que fomentan la cooperación y diversión.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {/* Beneficios para las empresas */}
+        <div class="bg-primary text-white py-12 px-6 lg:px-16">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6">Beneficios para tu empresa</h2>
+                <p class="text-lg leading-relaxed">
+                    Al contratar nuestras actividades infantiles, las empresas
+                    pueden ofrecer a sus empleados un ambiente familiar durante
+                    sus eventos corporativos, fortaleciendo el compromiso y
+                    la satisfacción de los trabajadores.
+                </p>
+            </div>
+        </div>
+
+        {/* Sección de contacto */}
+        <div class="bg-white text-primary py-12 px-6 lg:px-16 text-center">
+            <h2 class="text-3xl font-bold mb-4">¡Organiza un evento inolvidable!</h2>
+            <p class="text-black text-lg mb-6">
+                Contáctanos para personalizar un programa infantil adaptado a las
+                necesidades de tu empresa y sus trabajadores.
+            </p>
+            <a
+                href="tel:+34691247681"
+                class="px-6 py-3 bg-arena text-white font-semibold rounded-lg hover:bg-hoverRosa"
+            >
+                Habla con nosotros
+            </a>
+        </div>
+    </div>
+    <Footer />
+</Layout>

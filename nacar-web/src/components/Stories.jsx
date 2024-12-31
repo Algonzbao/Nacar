@@ -33,7 +33,7 @@ const StoriesGallery = ({ galleries }) => {
         {galleries.map((gallery, index) => (
           <div key={index} className="flex flex-col items-center">
             <button
-              className="flex-shrink-0 w-24 h-24 rounded-full overflow-hidden border-4 border-primary"
+              className="flex-shrink-0 w-20 h-20 rounded-full overflow-hidden border-4 border-primary"
               onClick={() => {
                 setSelectedGallery(gallery);
                 setCurrentImageIndex(0); // Reinicia a la primera imagen

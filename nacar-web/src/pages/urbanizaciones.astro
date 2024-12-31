@@ -1,0 +1,99 @@
+--- 
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+import { Image } from "astro:assets";
+import fondoUrbanizaciones from "../assets/lona.png"; 
+--- 
+
+<Layout title="Nacar Asociación - Urbanizaciones">
+    <Nav />
+    
+    {/* Hero Section */}
+    <div
+        class="flex flex-col items-center justify-center px-6 py-12 min-h-[40vh] bg-cover bg-center bg-no-repeat"
+        style={{
+            backgroundImage: `url(${fondoUrbanizaciones.src})`,
+        }}
+    >
+        <div class="max-w-3xl text-center p-4 bg-white bg-opacity-90 rounded-lg shadow-lg">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">
+                Actividades para Urbanizaciones
+            </h1>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                En Nacar Asociación organizamos eventos para urbanizaciones diseñados
+                para que los más pequeños disfruten de actividades divertidas, educativas
+                y seguras. ¡Unimos a las familias de tu comunidad a través del entretenimiento!
+            </p>
+        </div>
+    </div>
+    
+    {/* Actividades */}
+    <div class="bg-white py-12 px-6 lg:px-16">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8 text-primary">
+                Diversión y aprendizaje para todos
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Tarjeta 1 */}
+                <div class="bg-primary-light rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-primary mb-2">Talleres Creativos</h3>
+                    <p>
+                        Desde pintura y manualidades hasta cocina, nuestras actividades fomentan
+                        la creatividad y el trabajo en equipo.
+                    </p>
+                </div>
+                {/* Tarjeta 2 */}
+                <div class="bg-primary-light rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-primary mb-2">Juegos al Aire Libre</h3>
+                    <p>
+                        Organizamos gymkanas, mini olimpiadas y actividades deportivas
+                        en los espacios comunes de tu urbanización.
+                    </p>
+                </div>
+                {/* Tarjeta 3 */}
+                <div class="bg-primary-light rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-primary mb-2">Fiestas Temáticas</h3>
+                    <p>
+                        Creamos fiestas únicas como carnavales, jornadas medioambientales
+                        y celebraciones adaptadas a los intereses de los niños.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {/* Beneficios */}
+    <div class="bg-primary text-white py-12 px-6 lg:px-16">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-6">
+                Beneficios para tu Urbanización
+            </h2>
+            <ul class="list-disc pl-5 text-lg leading-relaxed">
+                <li>Fortalecemos la convivencia y el sentido de comunidad.</li>
+                <li>Adaptamos las actividades al espacio disponible.</li>
+                <li>Monitores especializados garantizan seguridad y diversión.</li>
+                <li>Flexibilidad en horarios y temáticas para satisfacer tus necesidades.</li>
+            </ul>
+        </div>
+    </div>
+    
+    {/* Llamada a la acción */}
+    <div class="text-center py-12 px-6 bg-white">
+        <h2 class="text-3xl font-bold mb-4 text-primary">
+            ¡Convierte tu urbanización en el lugar más divertido!
+        </h2>
+        <p class="text-lg mb-6">
+            Contacta con nosotros para organizar actividades personalizadas y hacer que
+            los niños disfruten al máximo. 
+        </p>
+        <a
+            href="tel:+34691247681"
+            class="px-6 py-3 bg-arena text-white font-semibold rounded-lg hover:bg-rosa"
+        >
+            Contáctanos ahora
+        </a>
+    </div>
+
+    <Footer />
+</Layout>

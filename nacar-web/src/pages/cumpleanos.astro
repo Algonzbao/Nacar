@@ -1,0 +1,90 @@
+---
+// Importaciones necesarias
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import campamentoImage from "../assets/jarras.png"; // Reemplaza con la imagen adecuada
+import cumpleImage from "../assets/coronas.png"; // Reemplaza con la imagen adecuada
+---
+
+<Layout title="Nacar Asociación - Campamentos Cumpleaños">
+    <Nav />
+    <div>
+        {/* Encabezado con fondo */}
+        <div
+        class="flex flex-col items-center justify-center px-6 py-12 min-h-[40vh] bg-cover bg-center bg-no-repeat"
+        style={{
+            backgroundImage: `url(${campamentoImage.src})`,
+        }}
+    >
+        <div class="max-w-3xl text-center p-4 bg-white bg-opacity-90 rounded-lg shadow-lg mt-8">
+            <h1 class="text-5xl lg:text-6xl font-bold text-arena mb-4 text-center">
+                Campamentos Cumpleaños
+            </h1>
+            <p class="text-lg text-black text-center max-w-2xl leading-relaxed">
+                Vive una experiencia única celebrando tu cumpleaños en un entorno lleno de diversión,
+                aventura y aprendizaje. Diseñamos actividades para todas las edades en un ambiente seguro
+                y educativo.
+            </p>
+        </div>
+    </div>
+    
+    
+
+        {/* Sección de detalles del campamento */}
+        <div class="py-12 px-6 lg:px-16 bg-white text-gray-800">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Imagen representativa */}
+                <div class="flex justify-center">
+                    <img
+                        src={cumpleImage.src}
+                        alt="Campamento Cumpleaños"
+                        class="rounded-lg shadow-lg"
+                    />
+                </div>
+
+                {/* Información sobre el campamento */}
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-3xl font-bold text-primary mb-4">
+                        ¿Qué incluye nuestro campamento cumpleaños?
+                    </h2>
+                    <ul class="list-disc pl-5 text-lg text-gray-700 leading-relaxed">
+                        <li>Actividades al aire libre: gymkanas, deportes y exploración.</li>
+                        <li>Talleres creativos: manualidades, pintura y cocina.</li>
+                        <li>Espacios seguros y supervisados por profesionales.</li>
+                        <li>Merienda y tarta personalizada para los invitados.</li>
+                        <li>Opciones de actividades temáticas (piratas, naturaleza, etc.).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {/* Equipo encargado */}
+        <div class="bg-primary text-white py-12 px-6 lg:px-16">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6">Nuestro equipo</h2>
+                <p class="text-lg leading-relaxed">
+                    Contamos con monitores especializados, animadores y educadores
+                    que garantizan una experiencia inolvidable, segura y educativa
+                    para cada niño y niña que participa en nuestros campamentos.
+                </p>
+            </div>
+        </div>
+
+        {/* Sección de contacto */}
+        <div class="bg-white text-primary py-12 px-6 lg:px-16 text-center">
+            <h2 class="text-3xl font-bold mb-4">¡Reserva tu cumpleaños!</h2>
+            <p class="text-black text-lg mb-6">
+                Ponte en contacto con nosotros para personalizar tu experiencia de
+                cumpleaños en un campamento único.
+            </p>
+            <a
+                href="tel:+34691247681"
+                class="px-6 py-3 bg-arena text-white font-semibold rounded-lg hover:bg-hoverRosa"
+            >
+                Contáctanos
+            </a>
+        </div>
+    </div>
+    <Footer />
+</Layout>
