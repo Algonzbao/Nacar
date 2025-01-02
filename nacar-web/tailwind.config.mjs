@@ -7,6 +7,7 @@ export default {
 		extend: {
 		  fontFamily: {
 			sans: ['Karla', 'sans-serif'],
+			wreath: ['Wreath-Bol', 'sans-serif'],
 		  },
 		  colors: {
 			primary: '#A4C8C1',

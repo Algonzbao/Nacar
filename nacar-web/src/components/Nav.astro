@@ -4,162 +4,182 @@ import logoNacar from "../assets/logoBlanco.png";
 ---
 
 <nav class="bg-primary text-white fixed w-full z-10">
-    <div class="h-16 flex justify-between items-center px-6 py-4 w-full max-w-full">
-      {/* Logo */}
-      <div class="flex items-center">
-        <a href="/" class="text-3xl font-bold flex items-center">
-          <Image src={logoNacar} alt="Logo" class="h-12 w-auto mr-2" />
-        </a>
-      </div>
-  
-      {/* Links visibles en pantallas grandes */}
-      <div class="hidden lg:flex items-center">
-        <ul class="flex gap-8 text-xl">
-          <li>
-            <a href="/conocenos" class="hover:text-hoverRosa font-bold">
-              Conoce
-            </a>
-          </li>
-          {/* Menú Eventos con dropdown */}
-          <li class="relative group">
-            <a
-              href="/eventos"
-              class="flex items-center justify-between font-bold hover:text-hoverRosa"
-              id="eventosLink"
-            >
-              Eventos
-              <svg
-                class="w-3 h-3 ml-2"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
-            </a>
-            {/* Dropdown */}
-            <ul
-              id="dropdownNavbar"
-              class="absolute hidden group-hover:block font-normal bg-primary text-white divide-y divide-gray-100 rounded-md shadow-lg mt-2 w-44"
-            >
-              <li>
-                <a
-                  href="/cumpleanos"
-                  class="block px-4 py-2 hover:bg-hoverRosa rounded"
-                >
-                  Cumpleaños
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/campamento"
-                  class="block px-4 py-2 hover:bg-hoverRosa rounded"
-                >
-                  Campementos
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/urbanizaciones"
-                  class="block px-4 py-2 hover:bg-hoverRosa rounded"
-                >
-                  Urbanizaciones
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="/inscripcion" class="hover:text-hoverRosa font-bold">
-              Contacto
-            </a>
-          </li>
-        </ul>
-      </div>
-  
-      {/* Botón del menú hamburguesa en pantallas pequeñas */}
-      <div class="lg:hidden">
-        <button id="hamburger-button" class="text-2xl focus:outline-none">
-          <span class="block w-8 h-1 bg-white mb-2"></span>
-          <span class="block w-8 h-1 bg-white mb-2"></span>
-          <span class="block w-8 h-1 bg-white"></span>
-        </button>
-      </div>
+  <div class="h-16 flex justify-between items-center px-6 py-4 w-full max-w-full">
+    <!-- Logo -->
+    <div class="flex items-center">
+      <a href="/" class="text-3xl font-bold flex items-center">
+        <Image src={logoNacar} alt="Logo" class="h-12 w-auto mr-2" />
+      </a>
     </div>
-  
-    {/* Menú desplegable en pantallas pequeñas */}
-    <div
-      id="mobileMenu"
-      class="hidden absolute top-16 left-0 w-full bg-slate-900 text-center p-5 z-50 animate-fade-in-down"
-    >
-      <ul class="text-xl">
-        <li class="my-4">
-          <a
-            href="/conocenos"
-            class="block hover:bg-slate-800 py-2 rounded mobileLink"
-          >
+
+    <!-- Links visibles en pantallas grandes -->
+    <div class="hidden lg:flex items-center">
+      <ul class="flex gap-8 text-xl">
+        <li>
+          <a href="/conocenos" class="hover:text-hoverRosa font-bold">
             Conoce
           </a>
         </li>
-        <li class="my-4">
+        <!-- Menú Eventos con dropdown -->
+        <li class="relative group">
           <a
             href="/eventos"
-            class="block hover:bg-slate-800 py-2 rounded mobileLink"
+            class="flex items-center justify-between font-bold hover:text-hoverRosa"
+            id="eventosLink"
           >
             Eventos
+            <svg
+              class="w-3 h-3 ml-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
           </a>
-        </li>
-        <li class="my-4">
-            <a
-              href="/cumpleanos"
-              class="block hover:bg-slate-800 py-2 rounded mobileLink"
-            >
-              Cumpleaños
-            </a>
-          </li>
-          <li class="my-4">
-            <a
-              href="/campamento"
-              class="block hover:bg-slate-800 py-2 rounded mobileLink"
-            >
-            Campementos
-            </a>
-          </li>
-          <li class="my-4">
-            <a
-              href="/urbanizaciones"
-              class="block hover:bg-slate-800 py-2 rounded mobileLink"
-            >
-              Urbanizaciones
-            </a>
-          </li>
-
-        <li class="my-4">
-          <a
-            href="/inscripcion"
-            class="block hover:bg-slate-800 py-2 rounded mobileLink"
+          <!-- Dropdown -->
+          <ul
+            id="dropdownNavbar"
+            class="absolute hidden group-hover:block font-normal bg-primary text-white divide-y divide-gray-100 rounded-md shadow-lg mt-2 w-44 opacity-0 transition-opacity duration-300"
           >
+            <li>
+              <a
+                href="/cumpleanos"
+                class="block px-4 py-2 hover:bg-hoverRosa rounded"
+              >
+                Cumpleaños
+              </a>
+            </li>
+            <li>
+              <a
+                href="/campamento"
+                class="block px-4 py-2 hover:bg-hoverRosa rounded"
+              >
+                Campementos
+              </a>
+            </li>
+            <li>
+              <a
+                href="/urbanizaciones"
+                class="block px-4 py-2 hover:bg-hoverRosa rounded"
+              >
+                Urbanizaciones
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/inscripcion" class="hover:text-hoverRosa font-bold">
             Contacto
           </a>
         </li>
       </ul>
     </div>
-  
-    <script is:inline>
-      document.addEventListener("astro:page-load", () => {
-        const hamburgerButton = document.getElementById("hamburger-button");
-        const mobileMenu = document.getElementById("mobileMenu");
-  
-        hamburgerButton?.addEventListener("click", () => {
-          mobileMenu?.classList.toggle("hidden");
-        });
+
+    <!-- Botón del menú hamburguesa en pantallas pequeñas -->
+    <div class="lg:hidden">
+      <button id="hamburger-button" class="text-2xl focus:outline-none">
+        <span class="block w-8 h-1 bg-white mb-2"></span>
+        <span class="block w-8 h-1 bg-white mb-2"></span>
+        <span class="block w-8 h-1 bg-white"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú desplegable en pantallas pequeñas -->
+  <div
+    id="mobileMenu"
+    class="hidden absolute top-16 left-0 w-full bg-slate-900 text-center p-5 z-50 animate-fade-in-down"
+  >
+    <ul class="text-xl">
+      <li class="my-4">
+        <a
+          href="/conocenos"
+          class="block hover:bg-slate-800 py-2 rounded mobileLink"
+        >
+          Conoce
+        </a>
+      </li>
+      <li class="my-4">
+        <a
+          href="/eventos"
+          class="block hover:bg-slate-800 py-2 rounded mobileLink"
+        >
+          Eventos
+        </a>
+      </li>
+      <li class="my-4">
+          <a
+            href="/cumpleanos"
+            class="block hover:bg-slate-800 py-2 rounded mobileLink"
+          >
+            Cumpleaños
+          </a>
+        </li>
+        <li class="my-4">
+          <a
+            href="/campamento"
+            class="block hover:bg-slate-800 py-2 rounded mobileLink"
+          >
+          Campementos
+          </a>
+        </li>
+        <li class="my-4">
+          <a
+            href="/urbanizaciones"
+            class="block hover:bg-slate-800 py-2 rounded mobileLink"
+          >
+            Urbanizaciones
+          </a>
+        </li>
+
+      <li class="my-4">
+        <a
+          href="/inscripcion"
+          class="block hover:bg-slate-800 py-2 rounded mobileLink"
+        >
+          Contacto
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <script is:inline>
+    document.addEventListener("astro:page-load", () => {
+      const hamburgerButton = document.getElementById("hamburger-button");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const eventosLink = document.getElementById("eventosLink");
+      const dropdownNavbar = document.getElementById("dropdownNavbar");
+
+      // Toggle mobile menu visibility
+      hamburgerButton?.addEventListener("click", () => {
+        mobileMenu?.classList.toggle("hidden");
       });
-    </script>
-  </nav>
-  
+
+      // Dropdown behavior for large screens
+      eventosLink?.addEventListener("mouseenter", () => {
+        dropdownNavbar.classList.remove("hidden");
+        setTimeout(() => {
+          dropdownNavbar.classList.add("opacity-100");
+        }, 100); // Retraso en mostrar la opacidad
+      });
+
+      eventosLink?.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+          dropdownNavbar.classList.remove("opacity-100");
+          setTimeout(() => {
+            dropdownNavbar.classList.add("hidden");
+          }, 800); // Retraso para ocultar el dropdown
+        }, 800); // Retraso en la ocultación
+      });
+    });
+  </script>
+</nav>
+
   
