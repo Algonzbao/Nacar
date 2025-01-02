@@ -1,0 +1,125 @@
+---
+// Importaciones necesarias
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import eventoImage from "../assets/vestido.png"; // Reemplaza con la imagen adecuada
+import actividadesImage from "../assets/aula.png"; // Reemplaza con la imagen adecuada
+---
+
+<Layout title="Nacar Asociación - Campamentos Urbanos">
+    <Nav />
+    <div>
+        {/* Encabezado */}
+        <div
+            class="flex flex-col items-center justify-center px-6 py-12 min-h-[40vh] bg-cover bg-center bg-no-repeat"
+            style={{
+                backgroundImage: `url(${eventoImage.src})`,
+            }}
+        >
+        <div class="max-w-3xl text-center p-4 bg-white bg-opacity-90 rounded-lg shadow-lg">
+            <h1 class="text-5xl lg:text-6xl font-bold text-arena mb-4 text-center">
+                Campamentos Urbanos para AMPAs y Ayuntamientos
+            </h1>
+            <p class="text-lg text-black text-center max-w-2xl leading-relaxed">
+                Nuestros campamentos urbanos son un recurso clave para proporcionar a los niños y niñas un espacio seguro, divertido y educativo en su propio entorno, fomentando su desarrollo personal y social
+            </p>
+        </div>
+        </div>
+
+        {/* Descripción del evento */}
+        <div class="py-12 px-6 lg:px-16 bg-white text-gray-800">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Imagen representativa */}
+                <div class="flex justify-center">
+                    <img
+                        src={actividadesImage.src}
+                        alt="Actividades para niños en eventos"
+                        class="rounded-lg shadow-lg"
+                    />
+                </div>
+
+                {/* Información sobre el evento */}
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-3xl font-bold text-primary mb-4">
+                        ¿Qué ofrecemos para un campemento urbano?
+                    </h2>
+                    <ul class="list-disc pl-5 text-lg text-gray-700 leading-relaxed">
+                        <li>Garantizamos un ratio de 1 monitor/a por cada 10 niños/as, asegurando una atención personalizada y de calidad para todos los participantes. Este enfoque permite un seguimiento cercano de cada menor y favorece el desarrollo de actividades dinámicas y seguras.</li>
+                        <li>Talleres creativos: pintura, manualidades y cocina.</li>
+                        <li>Deporte y juegos al aire libre: gymkanas, juegos cooperativos y mini olimpiadas.</li>
+                        <li>Talleres educativos: refuerzo en valores, reciclaje, medio ambiente y convivencia.</li>
+                        <li>Días temáticos: jornadas de disfraces, cultura y ciencia.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {/* Beneficios para las empresas */}
+        <div class="bg-primary text-white py-12 px-6 lg:px-16">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6">Cómo organizar tu campamento urbano</h2>
+                <p>Realizamos las actividades en instalaciones municipales, centros educativos o espacios cedidos por el AMPA o Ayuntamiento.</p>
+                <p>Adaptamos los materiales y recursos según las características del lugar.</p>
+                <p><b>Facilitación de la conciliación:</b> Un recurso práctico para las familias durante periodos vacacionales.</p>
+                <p><b>Proximidad:</b> Actividades organizadas en el propio municipio o entorno escolar.</p>
+                <p><b>Fomento de valores:</b> Campamentos que refuerzan el respeto, la igualdad y la convivencia.</p>
+                <p><b>Gestión integral:</b> Nos encargamos de toda la organización, desde la planificación hasta la ejecución.</p>
+                
+            </div>
+        </div>
+
+        {/* Sección de contacto */}
+        <div class="bg-white text-primary py-12 px-6 lg:px-16 text-center">
+            <h2 class="text-3xl font-bold mb-4">¡Organiza un evento inolvidable!</h2>
+            <p class="text-black text-lg mb-6">
+                Organizamos una reunión con el AMPA o Ayuntamiento para ajustar el programa a las características de los participantes y la comunidad.
+            </p>
+            <a
+                href="tel:+34691247681"
+                class="px-6 py-3 bg-arena text-white font-semibold rounded-lg hover:bg-hoverRosa"
+            >
+                Habla con nosotros
+            </a>
+        </div>
+        <section class="bg-gray-100 mb-12 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-bold text-center text-arena mb-10">
+                Vuestras reseñas nos animan a continuar cada día
+              </h2>
+              <div class="grid gap-8 lg:grid-cols-3">
+                <!-- Tarjeta de experiencia 1 -->
+                <div class="p-6 bg-white shadow-md rounded-lg flex flex-col justify-between h-full">
+                  <p class="text-lg text-gray-700 italic mb-4">
+                    "Conocemos Nácar porque nuestros hijos han ido al campamento organizado por ellos en el pueblo. Están pendientes de los niños y eso es una tranquilidad impagable para los padres. Además organizan distintas y variadas actividades  para los niños en función de su edad"
+                  </p>
+                  <h4 class="text-xl font-semibold text-arena text-right">
+                    - Buendía
+                  </h4>
+                </div>
+          
+                <!-- Tarjeta de experiencia 2 -->
+                <div class="p-6 bg-white shadow-md rounded-lg flex flex-col justify-between h-full">
+                  <p class="text-lg text-gray-700 italic mb-4">
+                    "Mis hijas siempre vuelven a casa llenas de alegría y nuevas experiencias. Para nosotros, los campamentos son un apoyo invaluable durante el verano. ¡Gracias por todo el cariño que les dais"
+                  </p>
+                  <h4 class="text-xl font-semibold text-arena text-right">
+                    - Mamá de Carla y Alba. Verano 2024
+                  </h4>
+                </div>
+          
+                <!-- Tarjeta de experiencia 3 -->
+                <div class="p-6 bg-white shadow-md rounded-lg flex flex-col justify-between h-full">
+                  <p class="text-lg text-gray-700 italic mb-4">
+                    "Trabajar con Nácar Asociación fue una gran experiencia. El ratio de monitores por niño nos dio mucha tranquilidad y las actividades fueron un ejemplo de aprendizaje y diversión."
+                  </p>
+                  <h4 class="text-xl font-semibold text-arena text-right mt-auto">
+                    - Marta Ruiz, AMPA Colegio
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </section>
+    </div>
+    <Footer />
+</Layout>
