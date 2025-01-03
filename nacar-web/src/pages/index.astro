@@ -20,43 +20,43 @@ const galleries = await getCollection("galleries");
 
 <Layout title="Nacar Asociación">
 	<Nav />
-	<div>
-		{/* Sección con fondo y contenido principal */}
-		<div
-			class="relative w-full min-h-[90vh] bg-cover bg-bottom"
-			style={{
-				backgroundImage: `url(${campamentoImagen.src})`,
-			}}
-		>
-			<div class="absolute top-0 left-0 w-full h-full primary font-sans">
-				<div class="mt-20">
-					<StoriesGallery
-						client:load
-						galleries={galleries
-							.map((g) => g.data)
-							.sort((a, b) => b.year - a.year)}
-					/>
-				</div>
-				<div
-					class="flex items-center justify-start lg:h-full px-8 sm:px-10 text-white"
-				>
-					<div>
-						<h1 class="font-wreath text-3xl sm:text-4xl font-bold mb-4">
-							Campamentos y Cumpleaños para los más pequeños
-						</h1>
-						<p class="text-lg sm:text-xl mb-8">
-							Campamentos totalmente adaptados, pensando en la diverisón y aprendizaje de valores. 
-						</p>
-						<a
-							href="/inscripcion"
-							class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
-						>
-							Habla con nosotros
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+<div>
+  {/* Sección con fondo y contenido principal */}
+  <div
+    class="relative w-full min-h-[90vh] bg-cover bg-bottom"
+    style={{
+      backgroundImage: `url(${campamentoImagen.src})`,
+    }}
+  >
+    <div class="absolute top-0 left-0 w-full h-full primary font-sans">
+      <div class="mt-20">
+        <StoriesGallery
+          client:load
+          galleries={galleries
+            .map((g) => g.data)
+            .sort((a, b) => b.year - a.year)}
+        />
+      </div>
+      {/* Contenedor de texto */}
+      <div class="flex items-center justify-start lg:h-full px-8 sm:px-10 text-white">
+        <div class="lg:mt-0 sm:mt-40 mt-40"> {/* Ajusta margin-top en dispositivos móviles */}
+          <h1 class="font-wreath text-3xl sm:text-4xl font-bold mb-4">
+            Campamentos y Cumpleaños para los más pequeños
+          </h1>
+          <p class="text-lg sm:text-xl mb-8">
+            Campamentos totalmente adaptados, pensando en la diverisón y aprendizaje de valores.
+          </p>
+          <a
+            href="/inscripcion"
+            class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
+          >
+            Habla con nosotros
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 		{/* Sección de texto e imagen */}
 		<div
@@ -76,41 +76,35 @@ const galleries = await getCollection("galleries");
 			</div>
 		</div>
 
-		{/* Sección con fondo de color y texto */}
 		<div class="bg-primary text-white py-10 px-6 lg:px-16">
-			<div
-				class="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center"
-			>
-				<div class="lg:w-2/3 text-center lg:text-left mb-6 lg:mb-0">
-					<h3 class="text-2xl sm:text-3xl font-bold mb-4">
-						Desde 2010, ofreciendo experiencias inolvidables para
-						toda la familia
-					</h3>
-					<p class="text-lg mb-4">
-						<span class="font-wreath text-2xl text-white">Nácar Asociación</span>  es una entidad sin ánimo de lucro con sede en Buendía, 
-						comprometida con la promoción de la igualdad, el desarrollo comunitario y 
-						la mejora de la calidad de vida de las familias de Castilla-La Mancha. 
-						Nuestra misión principal es proporcionar recursos y soluciones que permitan conciliar la vida laboral, 
-						familiar y personal, promoviendo valores como la igualdad, el respeto y la solidaridad.
-
-					</p>
-					<p class="text-lg mb-6">
-						Trabajamos con un enfoque cercano y adaptado a las necesidades de cada comunidad, 
-						implementando programas que generan impacto positivo en el día a día de las personas
-
-					</p>
-					<a
-						href="/eventos"
-						class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
-					>
-						Descubre nuestros eventos
-					</a>
-				</div>
-				<div class="lg:w-1/3 flex justify-center lg:justify-end">
-					<Image src={pajaro} alt="Logo" class="h-60 w-auto" />
-				</div>
+			<div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center">
+			  <div class="lg:w-2/3 text-center lg:text-left mb-6 lg:mb-0">
+				<h3 class="text-2xl sm:text-3xl font-bold mb-4 bg-arena rounded-lg">
+				  Desde 2010, ofreciendo experiencias inolvidables para
+				  toda la familia
+				</h3>
+				<p class="text-lg mb-8">
+				  <span class="font-wreath text-2xl text-white">Nácar Asociación</span>  es una entidad sin ánimo de lucro con sede en Buendía, 
+				  comprometida con la promoción de la igualdad, el desarrollo comunitario y 
+				  la mejora de la calidad de vida de las familias de Castilla-La Mancha. 
+				  Nuestra misión principal es proporcionar recursos y soluciones que permitan conciliar la vida laboral, 
+				  familiar y personal, promoviendo valores como la igualdad, el respeto y la solidaridad.
+				</p>
+		  
+				{/* Aumento del espacio entre el texto y el botón */}
+				<a
+				  href="/eventos"
+				  class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
+				>
+				  Descubre nuestros eventos
+				</a>
+			  </div>
+			  <div class="lg:w-1/3 flex justify-center lg:justify-end">
+				<Image src={pajaro} alt="Logo" class="h-60 w-auto" />
+			  </div>
 			</div>
-		</div>
+		  </div>
+		  
 
 		{/* CONTENEDOR LLAMAR AHORA */}
 		<div

@@ -7,60 +7,32 @@ const totalItems = shields.length;
 ---
 
 <div class="relative overflow-hidden w-full">
-    {/* Contenedor del slider */}
     <div
         id="slider-track"
-        class="flex items-center justify-evenly gap-48 transition-transform duration-700"
-        data-total-items={totalItems}
+        class="flex items-center transition-transform duration-700"
     >
         {
-            [...shields.sort((a, b) => a.data.id - b.data.id)].map((shield) => {
+            // Duplicar escudos para efecto infinito
+            [...shields, ...shields].map((shield, index) => {
                 const { data } = shield;
                 const { name, image } = data;
                 return (
-                    <div class="shield-container flex-shrink-0 flex flex-col items-center text-center w-24">
-                        {/* Contenedor del escudo */}
-                        <div class="flex items-center justify-center h-32">
+                    <div
+                        key={index}
+                        class="shield-container flex-shrink-0 flex flex-col items-center text-center"
+                    >
+                        {/* Imagen del escudo */}
+                        <div class="flex items-center justify-center h-32 md:h-40 lg:h-48">
                             <Image
                                 src={image}
-                                height={131}
-                                width={75}
                                 alt={`escudo-${name}`}
-                                class="w-3/4 h-auto object-contain rounded-lg"
+                                class="h-full w-auto object-contain rounded-lg"
                             />
                         </div>
 
-                        {/* Contenedor del texto con altura fija */}
-                        <div class="mt-4 flex items-center justify-center min-h-[56px]">
-                            <p class="text-sm text-gray-700 font-bold leading-tight">
-                                {name}
-                            </p>
-                        </div>
-                    </div>
-                );
-            })
-        }
-
-        {
-            [...shields.sort((a, b) => a.data.id - b.data.id)].map((shield) => {
-                const { data } = shield;
-                const { name, image } = data;
-                return (
-                    <div class="shield-container flex-shrink-0 flex flex-col items-center text-center w-24">
-                        {/* Contenedor del escudo */}
-                        <div class="flex items-center justify-center h-32">
-                            <Image
-                                src={image}
-                                height={131}
-                                width={75}
-                                alt={`escudo-${name}`}
-                                class="w-3/4 h-auto object-contain rounded-lg"
-                            />
-                        </div>
-
-                        {/* Contenedor del texto con altura fija */}
-                        <div class="mt-4 flex items-center justify-center min-h-[56px]">
-                            <p class="text-sm text-gray-700 font-bold leading-tight">
+                        {/* Texto del escudo */}
+                        <div class="mt-4">
+                            <p class="text-xs md:text-sm lg:text-base font-bold text-gray-700">
                                 {name}
                             </p>
                         </div>
@@ -73,14 +45,69 @@ const totalItems = shields.length;
 
 <script>
     let offset = 0;
-    const itemWidth = 280; // Ancho de imagen + espaciado (gap-48 + w-24)
     const track = document.getElementById("slider-track");
-    const totalItems = track?.dataset.totalItems ?? '0';
 
+    // Actualizar el estilo basado en el tamaño de la pantalla
+    const updateTrackStyles = () => {
+        const width = window.innerWidth;
+
+        // Determinar número de escudos visibles (máximo 4 en pantallas grandes)
+        const itemsVisible = width >= 1024 ? 4 : width >= 768 ? 2 : 1;
+
+        // Ajustar el espacio entre escudos
+        const gap = width >= 1024 ? 32 : 16; // Aumentar el gap en pantallas grandes
+
+        // Calcular el ancho de los escudos de forma dinámica
+        const shieldWidth = (track.offsetWidth - (itemsVisible - 1) * gap) / itemsVisible;
+
+        // Ajustar el espacio entre los escudos (gap) en la propiedad CSS
+        track.style.setProperty("--gap", `${gap}px`);
+        track.style.setProperty("--items-visible", itemsVisible);
+        track.style.setProperty("--shield-width", `${shieldWidth}px`);
+    };
+
+    window.addEventListener("resize", updateTrackStyles);
+    updateTrackStyles();
+
+    // Bucle infinito
+    const totalShields = track?.children.length / 2; // Número real de escudos
     if (track) {
         setInterval(() => {
-            offset = (offset + 1) % +totalItems;
-            track.style.transform = `translateX(-${offset * itemWidth}px)`;
-        }, 2000);
+            // Verificar si el total de escudos es válido antes de continuar
+            if (!totalShields || totalShields <= 0) return;
+
+            // Calcular el ancho de cada escudo y el desplazamiento
+            const shieldWidth = parseInt(getComputedStyle(track).getPropertyValue("--shield-width"));
+            const gap = parseInt(getComputedStyle(track).getPropertyValue("--gap"));
+            
+            // Incrementar el offset para mover los escudos
+            offset++;
+
+            // Asegurarse de que el desplazamiento se mantenga dentro de los límites
+            if (offset >= totalShields) {
+                offset = 0; // Reiniciar el offset cuando llegamos al final
+            }
+
+            // Calcular el desplazamiento total para centrar el siguiente escudo
+            let centerOffset = 0;
+            for (let i = 0; i < offset; i++) {
+                centerOffset += shieldWidth + gap; // Sumar los anchos de los escudos y los espacios entre ellos
+            }
+
+            // Ajustar el desplazamiento y mantener centrado
+            track.style.transform = `translateX(-${centerOffset}px)`;
+        }, 2000); // Desplazamiento cada 2 segundos
     }
 </script>
+
+<style>
+    #slider-track {
+        display: flex;
+        transition: transform 0.7s ease;
+        gap: var(--gap); /* Espaciado entre los elementos */
+    }
+
+    .shield-container {
+        flex: 0 0 var(--shield-width); /* Ajuste dinámico para cada elemento */
+    }
+</style>
