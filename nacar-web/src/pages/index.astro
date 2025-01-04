@@ -18,9 +18,10 @@ import StoriesGallery from "../components/Stories";
 const galleries = await getCollection("galleries");
 ---
 
-<Layout title="Nacar Asociación">
-	<Nav />
-<div>
+<Layout
+  title="Campamentos Urbanos y Cumpleaños en Castilla-La Mancha - Nácar Asociación">
+  <Nav />
+</Layout>
   {/* Sección con fondo y contenido principal */}
   <div
     class="relative w-full min-h-[90vh] bg-cover bg-bottom"
@@ -41,13 +42,13 @@ const galleries = await getCollection("galleries");
       <div class="flex items-center justify-start lg:h-full px-8 sm:px-10 text-white">
         <div class="lg:mt-0 sm:mt-40 mt-40"> {/* Ajusta margin-top en dispositivos móviles */}
           <h1 class="font-wreath text-3xl sm:text-4xl font-bold mb-4">
-            Campamentos y Cumpleaños para los más pequeños
+            Campamentos urbanos y Fiestas de Cumpleaños para los más pequeños
           </h1>
           <p class="text-lg sm:text-xl mb-8">
-            Campamentos totalmente adaptados, pensando en la diverisón y aprendizaje de valores.
+			Disfruta de actividades únicas, adaptadas para familias y comunidades, promoviendo valores de igualdad y solidaridad.
           </p>
           <a
-            href="/inscripcion"
+            href="/contacto"
             class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
           >
             Habla con nosotros
@@ -244,7 +245,7 @@ const galleries = await getCollection("galleries");
 					empresas.
 				</p>
 				<a
-					href="/inscripcion"
+					href="/contacto"
 					class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
 				>
 					Ir a Contacto
