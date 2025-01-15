@@ -1,6 +1,6 @@
 ---
 name: Aida
 position: Coordinadora de proyectos.
-image: ../../assets/Random.png
-linkedin: https://www.linkedin.com/in/carlota
+image: ../../assets/Aida.jpeg
+linkedin: https://www.linkedin.com/in/aida-horcajo-094721202/
 ---
