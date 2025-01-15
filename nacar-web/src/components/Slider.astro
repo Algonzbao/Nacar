@@ -45,60 +45,58 @@ const totalItems = shields.length;
 
 <script>
     let offset = 0;
-    const track = document.getElementById("slider-track");
+    let intervalId = null;
 
-    // Actualizar el estilo basado en el tamaño de la pantalla
-    const updateTrackStyles = () => {
-        const width = window.innerWidth;
+    const initSlider = () => {
+        const track = document.getElementById("slider-track");
 
-        // Determinar número de escudos visibles (máximo 4 en pantallas grandes)
-        const itemsVisible = width >= 1024 ? 4 : width >= 768 ? 2 : 1;
+        if (!track) return;
 
-        // Ajustar el espacio entre escudos
-        const gap = width >= 1024 ? 32 : 16; // Aumentar el gap en pantallas grandes
+        const updateTrackStyles = () => {
+            const width = window.innerWidth;
+            const itemsVisible = width >= 1024 ? 4 : width >= 768 ? 2 : 1;
+            const gap = width >= 1024 ? 32 : 16;
+            const shieldWidth = (track.offsetWidth - (itemsVisible - 1) * gap) / itemsVisible;
 
-        // Calcular el ancho de los escudos de forma dinámica
-        const shieldWidth = (track.offsetWidth - (itemsVisible - 1) * gap) / itemsVisible;
+            track.style.setProperty("--gap", `${gap}px`);
+            track.style.setProperty("--items-visible", itemsVisible);
+            track.style.setProperty("--shield-width", `${shieldWidth}px`);
+        };
 
-        // Ajustar el espacio entre los escudos (gap) en la propiedad CSS
-        track.style.setProperty("--gap", `${gap}px`);
-        track.style.setProperty("--items-visible", itemsVisible);
-        track.style.setProperty("--shield-width", `${shieldWidth}px`);
-    };
+        window.addEventListener("resize", updateTrackStyles);
+        updateTrackStyles();
 
-    window.addEventListener("resize", updateTrackStyles);
-    updateTrackStyles();
+        const totalShields = track.children.length / 2;
 
-    // Bucle infinito
-    const totalShields = track?.children.length / 2; // Número real de escudos
-    if (track) {
-        setInterval(() => {
-            // Verificar si el total de escudos es válido antes de continuar
+        if (intervalId) clearInterval(intervalId); // Limpia el intervalo previo
+
+        intervalId = setInterval(() => {
             if (!totalShields || totalShields <= 0) return;
 
-            // Calcular el ancho de cada escudo y el desplazamiento
             const shieldWidth = parseInt(getComputedStyle(track).getPropertyValue("--shield-width"));
             const gap = parseInt(getComputedStyle(track).getPropertyValue("--gap"));
-            
-            // Incrementar el offset para mover los escudos
-            offset++;
 
-            // Asegurarse de que el desplazamiento se mantenga dentro de los límites
-            if (offset >= totalShields) {
-                offset = 0; // Reiniciar el offset cuando llegamos al final
-            }
+            offset = (offset + 1) % totalShields;
 
-            // Calcular el desplazamiento total para centrar el siguiente escudo
             let centerOffset = 0;
             for (let i = 0; i < offset; i++) {
-                centerOffset += shieldWidth + gap; // Sumar los anchos de los escudos y los espacios entre ellos
+                centerOffset += shieldWidth + gap;
             }
 
-            // Ajustar el desplazamiento y mantener centrado
             track.style.transform = `translateX(-${centerOffset}px)`;
-        }, 2000); // Desplazamiento cada 2 segundos
-    }
+        }, 2000);
+    };
+
+    document.addEventListener("astro:page-load", initSlider); // Re-inicia al cargar la página
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+            initSlider();
+        } else if (intervalId) {
+            clearInterval(intervalId); // Pausa el slider cuando la página no está visible
+        }
+    });
 </script>
+
 
 <style>
     #slider-track {
