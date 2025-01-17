@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import fondoConchas from "../assets/Conchitas.png";
 import Nav from "../components/Nav.astro";
 
+sendGrid.setApiKey( import.meta.env.SENDGRID_API_KEY );
 // Carga la API key desde las variables de entorno
 
 if (Astro.request.method === "POST") {
