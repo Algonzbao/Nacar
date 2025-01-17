@@ -10,7 +10,6 @@ sendGrid.setApiKey( import.meta.env.SENDGRID_API_KEY );
 
 if (Astro.request.method === "POST") {
     try {
-        console.log('SendGrid API Key:', import.meta.env.SENDGRID_API_KEY);
         const data = await Astro.request.formData();
         const name = data.get("name")?.trim();
         const email = data.get("email")?.trim();
