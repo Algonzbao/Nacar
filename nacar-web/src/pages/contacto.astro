@@ -1,36 +1,67 @@
 ---
+import sendGrid from '@sendgrid/mail';
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import fondoConchas from "../assets/Conchitas.png";
 import Nav from "../components/Nav.astro";
 
+// Carga la API key desde las variables de entorno
+
 if (Astro.request.method === "POST") {
     try {
-
+        console.log('SendGrid API Key:', import.meta.env.SENDGRID_API_KEY);
         const data = await Astro.request.formData();
-        const message = data.get("message");
+        const name = data.get("name")?.trim();
+        const email = data.get("email")?.trim();
+        const phone = data.get("phone")?.trim();
+        const message = data.get("message")?.trim();
 
-        if (typeof message !== "string") {
-            alert("El contenido no es válido.");
-            throw new Error("El contenido no es válido.");
+        // Validaciones del servidor
+        if (!name) {
+            throw new Error("Por favor, ingresa tu nombre.");
+        }
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            throw new Error("Por favor, ingresa un correo electrónico válido.");
+        }
+
+        if (!phone || !/^\+?\d{9,15}$/.test(phone)) {
+            throw new Error("Por favor, ingresa un número de teléfono válido.");
+        }
+
+        if (!message) {
+            throw new Error("Por favor, escribe un mensaje.");
         }
 
         const isMalicious = /<\/?[a-z][\s\S]*>/i.test(message);
-
         if (isMalicious) {
-            alert("El contenido incluye caracteres no permitidos.");
             throw new Error("El contenido incluye caracteres no permitidos.");
         }
 
-        // Procesa el formulario aquí (enviar datos al servidor o email)
-        alert('Formulario enviado con éxito');
+        // Procesar el envío de email
+        const emailContent = {
+            to: "algonzbao@gmail.com",
+            from: "nacarasociacion@gmail.com",
+            subject: `Nuevo mensaje de contacto de ${name}`,
+            text: `
+                Nombre: ${name}
+                Correo: ${email}
+                Teléfono: ${phone}
+                Mensaje:
+                ${message}
+            `,
+        };
 
+        await sendGrid.send(emailContent);
+
+        return new Response(JSON.stringify({ success: true, message: "Formulario enviado con éxito." }), { status: 200 });
     } catch (e) {
-        if (e instanceof Error) {
-            console.error(e.message);
-        }
+        console.error(e.message);
+        return new Response(JSON.stringify({ success: false, message: e.message }), { status: 400 });
     }
 }
+
+
 ---
 
 <Layout title="Nacar Asociación - Contacto">
@@ -112,13 +143,13 @@ if (Astro.request.method === "POST") {
             <div class="lg:w-1/2 p-6 flex items-center justify-center">
                 <div
                     class="w-full max-w-4xl p-8 rounded-lg shadow-2xl"
-                    style={{
+                    style={ {
                         backgroundImage: `url(${fondoConchas.src})`,
-                        backgroundSize: "cover", // Asegura que el fondo cubra todo el contenedor
-                        backgroundPosition: "center", // Mantiene el fondo centrado
-                        backgroundRepeat: "no-repeat", // Evita que se repita el fondo
-                        backgroundAttachment: "fixed", // Para mantener el fondo fijo cuando se hace scroll
-                    }}
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundAttachment: "fixed",
+                    } }
                 >
                     <h1 class="font-wreath text-4xl font-bold mb-4 text-center">
                         Formulario de Inscripción
