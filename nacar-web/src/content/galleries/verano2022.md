@@ -6,6 +6,6 @@ images:
     - ../../assets/storiesveranos/portada22.jpg
     - ../../assets/storiesveranos/piragua2.jpg
     - ../../assets/storiesveranos/piragua.jpg
-    - ../../assets/storiesveranos/cubos.jpg
+    - ../../assets/storiesveranos/cubos.jpeg
     - ../../assets/storiesveranos/piscina.jpg
 ---

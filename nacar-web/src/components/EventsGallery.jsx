@@ -30,12 +30,20 @@ const EventsGallery = ({ events }) => {
                             const { id, img, title, description, gallery } = data;
                             return (
                                 <div key={id} className={cardClass}>
-                                    <div className="border-4 border-primary overflow-hidden cursor-pointer" onClick={() => setSelectedGallery(gallery)}>
+                                    <div 
+                                        className="border-4 border-primary overflow-hidden cursor-pointer"
+                                        style={{
+                                            width: "100%",
+                                            maxWidth: "256px",
+                                            aspectRatio: "1", // Asegura una relación 1:1 para un cuadrado perfecto
+                                            margin: "0 auto",
+                                        }}
+                                        onClick={() => setSelectedGallery(gallery)}
+                                    >
                                         <img
                                             src={img.src}
-                                            height={256}
                                             alt={title}
-                                            className="object-cover w-full h-64"
+                                            className="object-cover w-full h-full"
                                         />
                                     </div>
                                     <h2 className="text-lg font-bold mt-4">
@@ -54,7 +62,7 @@ const EventsGallery = ({ events }) => {
                     }   
                 </div>
         </>
-    )
-}
+    );
+};
 
 export default EventsGallery;
