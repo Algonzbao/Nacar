@@ -1,15 +1,14 @@
-// @ts-nocheck
 import { defineConfig } from 'astro/config';
-import dotenv from 'dotenv';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 
-// Cargar las variables de entorno desde el archivo sendgrid.env
-dotenv.config({ path: './sendgrid.env' });
-
+// La clave de SendGrid se lee de la variable de entorno SENDGRID_API_KEY
+// (.env.development en local, variables del proyecto en Vercel).
 export default defineConfig({
+  site: 'https://nacarasociacion.com',
   output: 'server',
-  integrations: [tailwind(), react()],
+  integrations: [tailwind(), react(), sitemap()],
   adapter: vercel(),
 });

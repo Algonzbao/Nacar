@@ -5,66 +5,74 @@ import Footer from "../components/Footer.astro";
 import fondoConchas from "../assets/Conchitas.png";
 import Nav from "../components/Nav.astro";
 
-sendGrid.setApiKey( import.meta.env.SENDGRID_API_KEY );
-// Carga la API key desde las variables de entorno
+// La clave se lee de la variable de entorno SENDGRID_API_KEY:
+// en local desde .env.development y en producción desde las variables del proyecto en Vercel.
+sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
+
+// Estado del formulario: error de validación o envío y valores escritos (para no perderlos si falla)
+let error = null;
+const values = { name: "", email: "", phone: "", message: "" };
+const enviado = Astro.url.searchParams.get("enviado") === "1";
 
 if (Astro.request.method === "POST") {
     try {
         const data = await Astro.request.formData();
-        const name = data.get("name")?.trim();
-        const email = data.get("email")?.trim();
-        const phone = data.get("phone")?.trim();
-        const message = data.get("message")?.trim();
+        values.name = String(data.get("name") ?? "").trim();
+        values.email = String(data.get("email") ?? "").trim();
+        values.phone = String(data.get("phone") ?? "").trim();
+        values.message = String(data.get("message") ?? "").trim();
 
         // Validaciones del servidor
-        if (!name) {
+        if (!values.name) {
             throw new Error("Por favor, ingresa tu nombre.");
         }
 
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
             throw new Error("Por favor, ingresa un correo electrónico válido.");
         }
 
-        if (!phone || !/^\+?\d{9,15}$/.test(phone)) {
+        // Se admiten espacios y guiones al escribir el teléfono (+34 123 456 789)
+        const phoneDigits = values.phone.replace(/[\s-]/g, "");
+        if (!/^\+?\d{9,15}$/.test(phoneDigits)) {
             throw new Error("Por favor, ingresa un número de teléfono válido.");
         }
 
-        if (!message) {
+        if (!values.message) {
             throw new Error("Por favor, escribe un mensaje.");
         }
 
-        const isMalicious = /<\/?[a-z][\s\S]*>/i.test(message);
-        if (isMalicious) {
+        if (/<\/?[a-z][\s\S]*>/i.test(values.message)) {
             throw new Error("El contenido incluye caracteres no permitidos.");
         }
 
-        // Procesar el envío de email
-        const emailContent = {
-            to: "nacarasociacion@gmail.com",
-            from: "nacarasociacion@gmail.com",
-            subject: `Nuevo mensaje de contacto de ${name}`,
-            text: `
-                Nombre: ${name}
-                Correo: ${email}
-                Teléfono: ${phone}
-                Mensaje:
-                ${message}
-            `,
-        };
+        try {
+            await sendGrid.send({
+                to: "nacarasociacion@gmail.com",
+                from: "nacarasociacion@gmail.com",
+                replyTo: values.email,
+                subject: `Nuevo mensaje de contacto de ${values.name}`,
+                text: [
+                    `Nombre: ${values.name}`,
+                    `Correo: ${values.email}`,
+                    `Teléfono: ${values.phone}`,
+                    "Mensaje:",
+                    values.message,
+                ].join("\n"),
+            });
+        } catch (e) {
+            console.error("Error al enviar con SendGrid:", e.message);
+            throw new Error("No se ha podido enviar el mensaje. Inténtalo de nuevo o escríbenos a nacarasociacion@gmail.com.");
+        }
 
-        await sendGrid.send(emailContent);
-
-        return new Response(JSON.stringify({ success: true, message: "Formulario enviado con éxito." }), { status: 200 });
+        // Patrón POST-redirect-GET: evita reenvíos al recargar y muestra el aviso de éxito
+        return Astro.redirect("/contacto?enviado=1", 303);
     } catch (e) {
-        console.error(e.message);
-        return new Response(JSON.stringify({ success: false, message: e.message }), { status: 400 });
+        error = e.message;
     }
 }
-
-
 ---
 
-<Layout title="Nacar Asociación - Contacto">
+<Layout title="Nacar Asociación - Contacto" description="Contacta con Nácar Asociación por teléfono, email o formulario para inscribirte en campamentos, cumpleaños y actividades.">
     <Nav />
     <div class="flex flex-col">
         <div class="flex flex-col lg:flex-row py-12 lg:h-screen">
@@ -154,12 +162,21 @@ if (Astro.request.method === "POST") {
                     <h1 class="font-wreath text-4xl font-bold mb-4 text-center">
                         Formulario de Inscripción
                     </h1>
+                    {enviado && (
+                        <p class="mb-4 p-4 rounded-lg bg-green-100 text-green-800 text-center font-semibold">
+                            ¡Gracias! Hemos recibido tu mensaje y nos pondremos en contacto contigo lo antes posible.
+                        </p>
+                    )}
+                    {error && (
+                        <p class="mb-4 p-4 rounded-lg bg-red-100 text-red-800 text-center font-semibold">{error}</p>
+                    )}
                     <form class="space-y-4 p-6 rounded-lg" method="POST">
                         <div>
                             <label class="block text-lg">Nombre:</label>
                             <input
                                 type="text"
                                 name="name"
+                                value={values.name}
                                 class="w-full p-2 border border-gray-300 rounded"
                                 placeholder="Tu nombre"
                                 required
@@ -170,6 +187,7 @@ if (Astro.request.method === "POST") {
                             <input
                                 type="email"
                                 name="email"
+                                value={values.email}
                                 class="w-full p-2 border border-gray-300 rounded"
                                 placeholder="tudireccion@email.com"
                                 required
@@ -180,6 +198,7 @@ if (Astro.request.method === "POST") {
                             <input
                                 type="tel"
                                 name="phone"
+                                value={values.phone}
                                 class="w-full p-2 border border-gray-300 rounded"
                                 placeholder="+34 123 456 789"
                                 required
@@ -192,7 +211,7 @@ if (Astro.request.method === "POST") {
                                 class="w-full p-2 border border-gray-300 rounded resize-none"
                                 placeholder="Escribe tu mensaje aquí..."
                                 rows="5"
-                                required></textarea>
+                                required>{values.message}</textarea>
                         </div>
                         <button
                             type="submit"

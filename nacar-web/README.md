@@ -1,48 +1,63 @@
-# Astro Starter Kit: Basics
+# Web de Nácar Asociación
+
+Código de [nacarasociacion.com](https://nacarasociacion.com/), la web de Nácar Asociación (Buendía, Castilla-La Mancha): campamentos urbanos, cumpleaños y actividades para familias, AMPAs, ayuntamientos y urbanizaciones.
+
+## Stack
+
+- [Astro 5](https://docs.astro.build/) en modo servidor (`output: 'server'`), desplegado como función serverless con el adaptador `@astrojs/vercel`.
+- React 19 solo para tres componentes interactivos (`Stories.jsx`, `EventsGallery.jsx`, `ModalGallery.jsx`).
+- Tailwind CSS 3 con la paleta y las fuentes definidas en `tailwind.config.mjs` (Karla para texto, Wreath-Bol para títulos).
+- Font Awesome Free para los iconos.
+- SendGrid (`@sendgrid/mail`) para enviar el formulario de contacto por email.
+
+## Estructura
+
+| Ruta | Contenido |
+| --- | --- |
+| `src/pages/` | Una página por ruta: `index`, `conocenos`, `eventos`, `cumpleanos`, `campamento`, `urbanizaciones` y `contacto`. |
+| `src/layouts/Layout.astro` | Plantilla HTML base (head, fuentes, view transitions). Acepta `title` y `description`. |
+| `src/components/` | `Nav`, `Footer` y `Slider` (Astro) y los tres componentes React. |
+| `src/content/` | Colecciones de contenido en Markdown (solo frontmatter): `team`, `events`, `shields` y `galleries`. Esquemas en `src/content.config.ts`. |
+| `src/assets/` | Imágenes. Astro las optimiza al servirlas. |
+| `public/` | Favicons, `robots.txt` y la fuente Wreath-Bol. |
+
+## Editar contenido
+
+Las fichas del equipo, los eventos, los escudos de los ayuntamientos y las galerías de veranos son archivos `.md` en `src/content/<colección>/`. Para añadir uno, crea un archivo nuevo copiando otro de la misma carpeta; para quitarlo, bórralo. Las imágenes se referencian con ruta relativa a `src/assets/`.
+
+Ejemplo de galería (`src/content/galleries/verano2024.md`):
+
+```md
+---
+year: 2024
+name: Verano 2024
+cover: ../../assets/verano24.png
+images:
+    - ../../assets/storiesveranos/portada.jpg
+    - ../../assets/storiesveranos/paseo.jpg
+---
+```
+
+Los textos de las páginas están escritos directamente en cada archivo `.astro` de `src/pages/`.
+
+## Desarrollo en local
+
+Requiere Node 20 o superior.
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev       # http://localhost:4321
+npm run build     # compila a dist/ y .vercel/output/
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+El formulario de contacto necesita la variable de entorno `SENDGRID_API_KEY`. En local, créala en un archivo `.env.development` (está en `.gitignore`):
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+SENDGRID_API_KEY=tu_clave
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Sin ella la web funciona, pero el envío del formulario falla. El remitente `nacarasociacion@gmail.com` tiene que estar verificado en la cuenta de SendGrid.
 
-## 🧞 Commands
+## Despliegue
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+La web está alojada en Vercel. La variable `SENDGRID_API_KEY` debe estar definida en las variables de entorno del proyecto en Vercel. Con el proyecto conectado al repositorio, cada push a `master` genera un despliegue.
