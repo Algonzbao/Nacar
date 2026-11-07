@@ -19,7 +19,7 @@ Código de [nacarasociacion.com](https://nacarasociacion.com/), la web de Nácar
 | `src/components/` | `Nav`, `Footer` y `Slider` (Astro) y los tres componentes React. |
 | `src/content/` | Colecciones de contenido en Markdown (solo frontmatter): `team`, `events`, `shields` y `galleries`. Esquemas en `src/content.config.ts`. |
 | `src/assets/` | Imágenes. Astro las optimiza al servirlas. |
-| `public/` | Favicons, `robots.txt` y la fuente Wreath-Bol. |
+| `public/` | Favicons, `robots.txt`, `sitemap.xml` (si añades una página, inclúyela aquí) y la fuente Wreath-Bol. |
 
 ## Editar contenido
 

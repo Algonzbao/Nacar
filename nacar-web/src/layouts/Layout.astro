@@ -13,8 +13,9 @@ const {
 	description = 'Nácar Asociación: campamentos urbanos, cumpleaños y actividades para familias, AMPAs y ayuntamientos en Castilla-La Mancha.',
 } = Astro.props;
 
-// URL canónica sin parámetros (p. ej. /contacto?enviado=1)
-const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+// URL canónica sin parámetros ni barra final (p. ej. /contacto?enviado=1 pasa a /contacto)
+const canonicalPath = Astro.url.pathname !== "/" && Astro.url.pathname.endsWith("/") ? Astro.url.pathname.slice(0, -1) : Astro.url.pathname;
+const canonical = new URL(canonicalPath, Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
