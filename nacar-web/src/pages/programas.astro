@@ -10,7 +10,9 @@ import { Image } from "astro:assets";
 // import mayores from "../assets/mayores.jpg";
 
 // TEXTOS: edita solo lo que hay dentro de "intro" y "programas".
-// Sustituye todos los [corchetes] por datos reales antes de publicar.
+// "datos" es opcional: si un programa no lo tiene, ese cuadro no se muestra.
+// Ejemplo para añadirlo a un programa:
+//   datos: [{ etiqueta: "Dónde", valor: "Buendía" }, { etiqueta: "Financia", valor: "..." }],
 const intro = {
   titulo: "Programas para toda la comunidad",
   texto:
@@ -55,7 +57,6 @@ const programas = [
       "Cómo detectar estafas y navegar con seguridad",
       "Atención individual y grupos reducidos",
     ],
-    
     imagen: null,
   },
 ];
@@ -101,14 +102,16 @@ const programas = [
               {p.actividades.map((a) => <li>{a}</li>)}
             </ul>
 
-            <dl class="mb-8 rounded-lg border-l-4 border-rosa bg-white/70 p-4 space-y-1">
-              {p.datos.map((d) => (
-                <div class="flex flex-wrap gap-x-3">
-                  <dt class="font-bold">{d.etiqueta}:</dt>
-                  <dd>{d.valor}</dd>
-                </div>
-              ))}
-            </dl>
+            {p.datos && p.datos.length > 0 && (
+              <dl class="mb-8 rounded-lg border-l-4 border-rosa bg-white/70 p-4 space-y-1">
+                {p.datos.map((d) => (
+                  <div class="flex flex-wrap gap-x-3">
+                    <dt class="font-bold">{d.etiqueta}:</dt>
+                    <dd>{d.valor}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
 
             <a
               href="/contacto"
