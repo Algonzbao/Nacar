@@ -1,0 +1,228 @@
+---
+// Guárdala como: nacar-web/src/pages/index.astro  (sustituye a la actual)
+// Requiere también: src/components/ProgramasPortada.astro
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+import Slider from "../components/Slider.astro";
+import ProgramasPortada from "../components/ProgramasPortada.astro";
+import Layout from "../layouts/Layout.astro";
+import campamentoImagen from "../assets/Campamento_Buendia.png";
+import logoCorresponsables from "../assets/corresponsables.png";
+import empresa from "../assets/campamentos.jpg";
+import logoNacar from "../assets/LogoNacar.png";
+import cumple from "../assets/cumpleaños.jpg";
+import manos from "../assets/handsOn.jpg";
+import pajaro from "../assets/pájaro.png";
+import urba from "../assets/empresa.jpg";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import StoriesGallery from "../components/Stories";
+
+const galleries = await getCollection("galleries");
+---
+
+<Layout
+  title="Nácar Asociación: programas para personas y comunidades de toda España"
+  description="Nácar Asociación ofrece programas y servicios a ayuntamientos, diputaciones y entidades de toda España: infancia y familias, personas mayores, desarrollo rural, inclusión, formación y consultoría. Sede en Buendía."
+>
+  <Nav />
+  <div>
+    {/* HERO */}
+    <div
+      class="relative w-full min-h-[90vh] bg-cover bg-bottom"
+      style={{ backgroundImage: `url(${campamentoImagen.src})` }}
+    >
+      <div class="absolute top-0 left-0 w-full h-full primary font-sans">
+        <div class="mt-20">
+          <StoriesGallery
+            client:load
+            galleries={galleries.map((g) => g.data).sort((a, b) => b.year - a.year)}
+          />
+        </div>
+        <div class="flex items-center justify-start lg:h-full px-8 sm:px-10 text-white">
+          <div class="lg:mt-0 sm:mt-40 mt-40">
+            <h1 class="font-wreath text-3xl sm:text-4xl font-bold mb-4">
+              Programas y servicios para personas y comunidades de toda España
+            </h1>
+            <p class="text-lg sm:text-xl mb-8 max-w-2xl">
+              Infancia y familias, personas mayores, desarrollo rural, inclusión, formación y consultoría
+              para ayuntamientos, diputaciones y entidades.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="/programas"
+                class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
+              >
+                Ver programas
+              </a>
+              <a
+                href="/contacto"
+                class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
+              >
+                Habla con nosotros
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* QUIÉNES SOMOS */}
+    <div class="flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-gray-50">
+      <div class="lg:w-1/2">
+        <Image src={logoNacar} alt="Logo Nacar" class="w-full h-auto" />
+      </div>
+      <div class="lg:w-1/2 text-center lg:text-left mt-6 lg:mt-0">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Compromiso, igualdad y cercanía</h2>
+        <p class="text-lg text-gray-700">
+          En <span class="font-wreath text-2xl">Nácar Asociación</span> trabajamos desde Buendía para mejorar la
+          calidad de vida de las personas y las comunidades de toda España. Como entidad sin ánimo de lucro,
+          nuestra misión es construir comunidades más igualitarias, inclusivas y solidarias.
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-primary text-white py-10 px-6 lg:px-16">
+      <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center">
+        <div class="lg:w-2/3 text-center lg:text-left mb-6 lg:mb-0">
+          <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">
+            Desde 2010, trabajando por las personas y las comunidades
+          </h3>
+          <p class="text-lg mb-8">
+            <span class="font-wreath text-2xl text-white">Nácar Asociación</span> es una entidad sin ánimo de
+            lucro con sede en Buendía, comprometida con la promoción de la igualdad, el desarrollo comunitario y
+            la mejora de la calidad de vida de las personas. Nuestra misión principal es proporcionar recursos y
+            soluciones que mejoren el bienestar de las comunidades, promoviendo valores como la igualdad, el
+            respeto y la solidaridad.
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+            <a
+              href="/mision-vision-valores"
+              class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
+            >
+              Misión, Visión y Valores
+            </a>
+            <a
+              href="/eventos"
+              class="px-6 py-3 bg-white text-gray-800 font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
+            >
+              Descubre nuestros eventos
+            </a>
+          </div>
+        </div>
+        <div class="lg:w-1/3 flex justify-center lg:justify-end">
+          <Image src={pajaro} alt="Logo" class="h-60 w-auto" />
+        </div>
+      </div>
+    </div>
+
+    {/* TODOS LOS PROGRAMAS */}
+    <ProgramasPortada />
+
+    {/* LLAMAR AHORA */}
+    <div class="flex flex-col items-center justify-center bg-white text-black py-12 px-6 lg:px-16">
+      <h2 class="text-3xl font-bold text-center mb-4">¿Necesitas un programa para tu municipio o entidad?</h2>
+      <p class="text-lg mb-6 text-center">
+        Ponte en contacto con nosotros. <span class="font-semibold">¡Llámanos!</span>
+      </p>
+      <a
+        href="tel:+34691247681"
+        class="px-6 py-3 bg-arena text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300"
+      >
+        Llamar ahora
+      </a>
+    </div>
+
+    {/* SERVICIOS PARA FAMILIAS (dentro del área Infancia y familias) */}
+    <div class="mt-12 px-6">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Servicios para familias y comunidades</h2>
+      <p class="text-lg text-center text-gray-700 mb-8">Algunos de los servicios del área de infancia y familias.</p>
+    </div>
+    <div class="flex flex-col lg:flex-row justify-center items-stretch w-full max-w-7xl mx-auto gap-6">
+      {/* CUMPLEAÑOS */}
+      <div class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative">
+        <Image src={cumple} alt="Cumpleaños" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+        <h3 class="text-2xl font-bold mb-2">Cumpleaños</h3>
+        <p class="text-base mb-6 text-center">
+          ¡Celebra momentos inolvidables con nosotros! Organizamos tu cumpleaños soñado.
+        </p>
+        <a
+          href="/cumpleanos"
+          class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
+        >
+          Celebra con nosotros
+        </a>
+      </div>
+
+      {/* CAMPAMENTOS */}
+      <div class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative">
+        <Image src={empresa} alt="Campamentos" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+        <h3 class="text-2xl font-bold mb-2">Campamentos</h3>
+        <p class="text-base mb-6 text-center">
+          Campamentos urbanos adaptados a las necesidades de AMPAs y Ayuntamientos
+        </p>
+        <a
+          href="/campamento"
+          class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
+        >
+          Nuestros Campas
+        </a>
+      </div>
+
+      {/* URBANIZACIONES */}
+      <div class="flex flex-col items-center bg-arena text-gray-800 p-8 pb-16 rounded-lg shadow-lg w-full lg:w-1/3 relative">
+        <Image src={urba} alt="Urbanizaciones" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+        <h3 class="text-2xl font-bold mb-2">Urbanizaciones</h3>
+        <p class="text-base mb-6 text-center">
+          Organizamos actividades especiales para urbanizaciones y comunidades.
+        </p>
+        <a
+          href="/urbanizaciones"
+          class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-rosa transition-colors duration-300 absolute bottom-6"
+        >
+          Descubre más
+        </a>
+      </div>
+    </div>
+
+    {/* PLAN CORRESPONSABLES + SLIDER */}
+    <div id="plan-corresponsables" class="mb-10">
+      <div class="flex flex-col items-center justify-center py-12 px-6 mt-8 w-full">
+        <div class="mb-6 text-center">
+          <Image src={logoCorresponsables} alt="Logo Corresponsables" class="w-40 mx-auto mb-4" />
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Experiencia con Ayuntamientos:</h2>
+        </div>
+        <p class="text-lg text-gray-700 mb-8 text-center w-full lg:w-1/3 relative">
+          Como entidad ejecutora del Plan Corresponsables, ofrecemos actividades como ludotecas, campamentos y
+          talleres educativos, diseñados para facilitar la conciliación laboral y familiar. Este programa no solo
+          apoya a las familias en la gestión de su tiempo, sino que también fomenta valores de igualdad entre
+          mujeres y hombres.
+        </p>
+        <div class="slider-container w-full flex justify-center">
+          <Slider />
+        </div>
+      </div>
+    </div>
+
+    {/* SECCIÓN FINAL */}
+    <div class="flex flex-col lg:flex-row items-center justify-between py-12 px-6 bg-primary rounded-lg shadow-lg mb-20">
+      <div class="flex lg:w-1/3 lg:pr-8 mb-6 lg:mb-0">
+        <Image src={manos} alt="Actividades de Nácar Asociación" class="w-full h-64 object-cover rounded-lg" />
+      </div>
+      <div class="lg:w-2/3 text-left">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Cuéntanos las necesidades de tu municipio</h2>
+        <p class="text-lg text-gray-700 mb-6">
+          Diseñamos propuestas técnicas y económicas a medida para ayuntamientos, diputaciones y entidades de
+          toda España. Descubre todo lo que podemos hacer juntos.
+        </p>
+        <a
+          href="/contacto"
+          class="px-6 py-3 bg-rosa text-white font-semibold rounded-lg hover:bg-arena transition-colors duration-300"
+        >
+          Solicita una propuesta
+        </a>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
