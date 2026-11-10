@@ -1,0 +1,61 @@
+---
+// Guárdala como: nacar-web/src/pages/mision-vision-valores.astro
+// BORRADOR: textos redactados a partir del documento de programas.
+// Revísalos y sustitúyelos por los oficiales de la asociación antes de publicar.
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const mision =
+  "Impulsar programas y servicios que mejoren la vida de las personas y fortalezcan las comunidades, desde la infancia y las familias hasta las personas mayores y el medio rural, en todo el territorio nacional.";
+const vision =
+  "Ser un aliado cercano y profesional para ayuntamientos, diputaciones y entidades que buscan desarrollar proyectos sociales, educativos y comunitarios.";
+const valores = [
+  { titulo: "Igualdad y diversidad", texto: "Oportunidades para todas las personas, sin discriminación." },
+  { titulo: "Inclusión", texto: "Programas accesibles que no dejan a nadie atrás." },
+  { titulo: "Participación comunitaria", texto: "Las comunidades son protagonistas de sus proyectos." },
+  { titulo: "Sostenibilidad", texto: "Compromiso con las personas y con el entorno." },
+  { titulo: "Compromiso con el territorio", texto: "Pueblos vivos y comunidades conectadas." },
+  { titulo: "Profesionalidad", texto: "Proyectos bien diseñados, gestionados y evaluados." },
+];
+---
+
+<Layout
+  title="Misión, Visión y Valores - Nácar Asociación"
+  description="Misión, visión y valores de Nácar Asociación: programas y servicios para personas y comunidades de toda España."
+>
+  <Nav />
+  <main class="text-gray-800">
+    <header class="bg-primary/30 px-6 pt-28 pb-14 md:pt-32">
+      <h1 class="mx-auto max-w-5xl font-wreath text-4xl md:text-6xl text-azul">Misión, Visión y Valores</h1>
+    </header>
+
+    <section class="px-6 py-14">
+      <div class="mx-auto max-w-5xl grid gap-10 md:grid-cols-2">
+        <div>
+          <h2 class="font-wreath text-3xl text-azul mb-3">Misión</h2>
+          <p class="text-lg leading-relaxed">{mision}</p>
+        </div>
+        <div>
+          <h2 class="font-wreath text-3xl text-azul mb-3">Visión</h2>
+          <p class="text-lg leading-relaxed">{vision}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-arena/20 px-6 py-14">
+      <div class="mx-auto max-w-5xl">
+        <h2 class="font-wreath text-3xl text-azul mb-8">Valores</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {valores.map((v) => (
+            <div class="rounded-xl border-l-4 border-rosa bg-white p-5">
+              <h3 class="font-bold text-lg mb-1">{v.titulo}</h3>
+              <p>{v.texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
