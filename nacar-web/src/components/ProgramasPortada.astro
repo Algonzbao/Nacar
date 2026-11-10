@@ -1,0 +1,58 @@
+---
+// Guárdalo como: nacar-web/src/components/ProgramasPortada.astro
+// Se usa en la portada con:  <ProgramasPortada />
+// Edita solo "areas". "ejemplos" son 3 programas de muestra de cada área.
+const areas = [
+  { id: "infancia-familias", titulo: "Infancia y familias", lema: "Conciliación, educación y ocio",
+    ejemplos: ["Plan Corresponsables", "Ludotecas y escuelas vacacionales", "Campamentos urbanos y rurales"] },
+  { id: "personas-mayores", titulo: "Personas mayores", lema: "Autonomía, bienestar y participación",
+    ejemplos: ["Envejecimiento activo", "Prevención de la soledad no deseada", "Capacitación digital"] },
+  { id: "desarrollo-rural", titulo: "Desarrollo rural", lema: "Pueblos vivos, comunidades conectadas",
+    ejemplos: ["Programas contra la despoblación", "Dinamización de municipios", "Participación vecinal"] },
+  { id: "inclusion-igualdad", titulo: "Inclusión e igualdad", lema: "Oportunidades para todas las personas",
+    ejemplos: ["Inclusión social", "Igualdad y diversidad", "Inclusión de personas con discapacidad"] },
+  { id: "formacion-empleo", titulo: "Formación y empleo", lema: "Competencias para nuevas oportunidades",
+    ejemplos: ["Formación presencial y teleformación", "Orientación laboral", "Emprendimiento y autoempleo"] },
+  { id: "consultoria-proyectos", titulo: "Consultoría y gestión", lema: "Soluciones para administraciones y entidades",
+    ejemplos: ["Diseño y redacción de proyectos", "Gestión de programas municipales", "Asistencia técnica a ayuntamientos"] },
+  { id: "sostenibilidad-cultura", titulo: "Sostenibilidad y cultura", lema: "Experiencias que unen a las personas",
+    ejemplos: ["Educación ambiental", "Voluntariado y acción comunitaria", "Dinamización cultural"] },
+];
+---
+
+<section id="programas-nacar" class="px-6 py-16 md:py-24 bg-white text-gray-800">
+  <div class="mx-auto max-w-6xl">
+    <h2 class="font-wreath text-3xl md:text-5xl text-azul mb-4">
+      Programas y servicios para personas y comunidades de toda España
+    </h2>
+    <p class="max-w-3xl text-lg md:text-xl leading-relaxed mb-10">
+      Trabajamos con ayuntamientos, diputaciones y entidades en siete áreas: desde la infancia y las familias
+      hasta las personas mayores y el medio rural.
+    </p>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {areas.map((a) => (
+        <a
+          href={`/programas#${a.id}`}
+          class="block rounded-xl border-2 border-primary p-6 transition hover:border-rosa hover:shadow-lg"
+        >
+          <h3 class="font-wreath text-2xl text-azul mb-1">{a.titulo}</h3>
+          <p class="italic mb-4">{a.lema}</p>
+          <ul class="list-disc pl-5 text-sm space-y-1 marker:text-rosa">
+            {a.ejemplos.map((e) => <li>{e}</li>)}
+          </ul>
+          <span class="mt-4 inline-block font-bold text-rosa">Ver programas →</span>
+        </a>
+      ))}
+
+      <a
+        href="/contacto"
+        class="flex flex-col justify-center rounded-xl bg-rosa p-6 text-white transition hover:bg-hoverRosa"
+      >
+        <h3 class="font-wreath text-2xl mb-2">¿Necesitas una propuesta?</h3>
+        <p class="mb-4">Cuéntanos las necesidades de tu municipio o entidad.</p>
+        <span class="font-bold">Solicita una propuesta →</span>
+      </a>
+    </div>
+  </div>
+</section>
