@@ -20,6 +20,7 @@ const areas = [
     corto: "Infancia y familias",
     titulo: "Infancia, adolescencia y familias",
     lema: "Conciliación, educación y ocio",
+    pagina: "/programas/infancia-familias",
     programas: [
       "Plan Corresponsables",
       "Ludotecas municipales",
@@ -37,6 +38,7 @@ const areas = [
     corto: "Personas mayores",
     titulo: "Personas mayores y envejecimiento activo",
     lema: "Autonomía, bienestar y participación",
+    pagina: "/programas/personas-mayores",
     programas: [
       "Programas de envejecimiento activo",
       "Prevención de la soledad no deseada",
@@ -55,6 +57,7 @@ const areas = [
     corto: "Desarrollo rural",
     titulo: "Desarrollo rural y dinamización territorial",
     lema: "Pueblos vivos, comunidades conectadas",
+    pagina: "/programas/desarrollo-rural",
     programas: [
       "Programas contra la despoblación",
       "Dinamización sociocultural de municipios",
@@ -182,6 +185,11 @@ const areas = [
             >
               Solicita una propuesta
             </a>
+                  {a.pagina && (
+              <a href={a.pagina} class="mt-4 block font-bold text-azul underline hover:text-rosa">
+                Más información →
+              </a>
+            )}
           </div>
 
           <ul class="md:col-span-2 md:columns-2 gap-x-8 list-disc pl-5 marker:text-rosa">
