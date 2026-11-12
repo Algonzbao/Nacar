@@ -1,0 +1,154 @@
+---
+// Guárdala como: nacar-web/src/pages/programas/[slug].astro
+// Una sola plantilla que crea 3 páginas: /programas/infancia-familias,
+// /programas/personas-mayores y /programas/desarrollo-rural.
+// Para editar un texto, cambia solo lo que hay dentro de "programas".
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+
+const programas = {
+  "infancia-familias": {
+    nombre: "Infancia y familias",
+    metaTitle: "Ludotecas y campamentos para ayuntamientos | Nácar Asociación",
+    metaDescription:
+      "Ludotecas municipales, campamentos urbanos y rurales, días sin cole y actividades de conciliación para ayuntamientos y entidades. Solicita tu propuesta.",
+    h1: "Ludotecas, campamentos y conciliación para ayuntamientos",
+    intro:
+      "Ayudamos a ayuntamientos y entidades a ofrecer servicios de conciliación, educación y ocio para la infancia, la adolescencia y las familias.",
+    incluye: [
+      "Plan Corresponsables",
+      "Ludotecas municipales",
+      "Días sin cole y escuelas vacacionales",
+      "Campamentos urbanos y rurales",
+      "Actividades extraescolares y aulas matinales",
+      "Programas de ocio educativo y tiempo libre",
+      "Animación infantil y eventos familiares",
+      "Educación emocional, igualdad y convivencia",
+      "Programas de apoyo a familias",
+    ],
+  },
+  "personas-mayores": {
+    nombre: "Personas mayores",
+    metaTitle: "Envejecimiento activo para ayuntamientos | Nácar Asociación",
+    metaDescription:
+      "Programas de envejecimiento activo, prevención de la soledad no deseada, estimulación cognitiva y capacitación digital para personas mayores. Pide una propuesta.",
+    h1: "Envejecimiento activo y bienestar para personas mayores",
+    intro:
+      "Programas para que las personas mayores mantengan su autonomía, su bienestar y su participación en la comunidad, pensados para ayuntamientos y entidades.",
+    incluye: [
+      "Programas de envejecimiento activo",
+      "Prevención de la soledad no deseada",
+      "Alfabetización y capacitación digital",
+      "Estimulación cognitiva y memoria",
+      "Promoción de la autonomía personal",
+      "Actividad física adaptada y hábitos saludables",
+      "Acompañamiento social y comunitario",
+      "Atención Centrada en la Persona (ACP)",
+      "Apoyo y formación a personas cuidadoras",
+      "Actividades intergeneracionales",
+    ],
+  },
+  "desarrollo-rural": {
+    nombre: "Desarrollo rural",
+    metaTitle: "Programas contra la despoblación y dinamización rural | Nácar Asociación",
+    metaDescription:
+      "Dinamización sociocultural, participación vecinal y programas contra la despoblación para municipios del medio rural. Solicita una propuesta a medida.",
+    h1: "Dinamización rural y programas contra la despoblación",
+    intro:
+      "Proyectos para que los pueblos estén vivos y conectados: actividades, servicios y participación vecinal para municipios, diputaciones y entidades.",
+    incluye: [
+      "Programas contra la despoblación",
+      "Dinamización sociocultural de municipios",
+      "Actividades y servicios para población rural",
+      "Programas de participación vecinal",
+      "Revitalización de espacios comunitarios",
+      "Programas intergeneracionales en el medio rural",
+      "Promoción del patrimonio cultural y natural",
+      "Educación ambiental y sostenibilidad",
+      "Impulso del asociacionismo rural",
+      "Proyectos de cohesión territorial",
+    ],
+  },
+};
+
+const { slug } = Astro.params;
+const p = programas[slug];
+if (!p) {
+  return new Response(null, { status: 404 });
+}
+const otros = Object.entries(programas).filter(([clave]) => clave !== slug);
+---
+
+<Layout title={p.metaTitle} description={p.metaDescription}>
+  <Nav />
+  <main class="text-gray-800">
+    <header class="bg-primary/30 px-6 pt-28 pb-14 md:pt-32 md:pb-16">
+      <div class="mx-auto max-w-5xl">
+        <p class="mb-3 text-sm">
+          <a href="/programas" class="underline hover:text-rosa">Programas</a> / {p.nombre}
+        </p>
+        <h1 class="font-wreath text-3xl md:text-5xl text-azul mb-5">{p.h1}</h1>
+        <p class="max-w-2xl text-lg md:text-xl leading-relaxed mb-8">{p.intro}</p>
+        <a
+          href="/contacto"
+          class="inline-block rounded-lg bg-rosa px-6 py-3 font-bold text-white transition hover:bg-hoverRosa"
+        >
+          Solicita una propuesta técnica y económica
+        </a>
+      </div>
+    </header>
+
+    <section class="px-6 py-14">
+      <div class="mx-auto max-w-5xl">
+        <h2 class="font-wreath text-3xl text-azul mb-6">Qué incluye</h2>
+        <ul class="md:columns-2 gap-x-10 list-disc pl-5 marker:text-rosa text-lg">
+          {p.incluye.map((i) => <li class="break-inside-avoid py-1">{i}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="bg-arena/20 px-6 py-14">
+      <div class="mx-auto max-w-5xl grid gap-10 md:grid-cols-2">
+        <div>
+          <h2 class="font-wreath text-3xl text-azul mb-3">¿A quién va dirigido?</h2>
+          <p class="text-lg leading-relaxed">
+            A ayuntamientos, diputaciones y entidades que quieren ofrecer este servicio en su municipio o
+            territorio, en cualquier punto de España.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-wreath text-3xl text-azul mb-3">¿Cómo se solicita?</h2>
+          <p class="text-lg leading-relaxed">
+            Cuéntanos las necesidades de tu municipio o entidad desde la página de
+            <a href="/contacto" class="font-bold underline hover:text-rosa">contacto</a> y te preparamos una
+            propuesta técnica y económica a medida.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-14">
+      <div class="mx-auto max-w-5xl">
+        <h2 class="font-wreath text-3xl text-azul mb-6">Otros programas</h2>
+        <div class="flex flex-wrap gap-3">
+          {otros.map(([clave, o]) => (
+            <a
+              href={`/programas/${clave}`}
+              class="rounded-full border-2 border-azul px-5 py-2 font-bold text-azul transition hover:bg-azul hover:text-white"
+            >
+              {o.nombre}
+            </a>
+          ))}
+          <a
+            href="/programas"
+            class="rounded-full border-2 border-azul px-5 py-2 font-bold text-azul transition hover:bg-azul hover:text-white"
+          >
+            Ver todos los programas
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
